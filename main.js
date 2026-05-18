@@ -96,8 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. PRELOADER & INITIAL REVEALS
     // ==========================================
     
-    // Smooth reset for elements before animation
-    gsap.set(".reveal-text, .reveal-fade", { opacity: 0, y: 60 });
+    // Smooth reset for elements before animation to prevent jumps
+    gsap.set(".reveal-text, .reveal-fade", { opacity: 0, y: 80 });
 
     const tlLoader = gsap.timeline({
         onComplete: () => {
@@ -148,9 +148,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 scrollTrigger: {
                     trigger: el,
                     start: "top 85%",
+                    once: true // Prevents bugs if scrolling up and down quickly
                 }
             }
         );
+    });
+
+    // Refresh ScrollTrigger after all images load to fix positioning bugs
+    window.addEventListener('load', () => {
+        ScrollTrigger.refresh();
     });
 
     // ==========================================
