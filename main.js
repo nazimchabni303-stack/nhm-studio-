@@ -92,42 +92,67 @@ document.addEventListener('DOMContentLoaded', () => {
     updateClock();
     setInterval(updateClock, 1000);
 
-    // Initial Reveals
-    gsap.to(".reveal-text", {
-        y: 0,
-        opacity: 1,
-        duration: 2.5,
-        ease: "power3.out",
-        delay: 0.2
+    // ==========================================
+    // 3. PRELOADER & INITIAL REVEALS
+    // ==========================================
+    
+    // Smooth reset for elements before animation
+    gsap.set(".reveal-text, .reveal-fade", { opacity: 0, y: 60 });
+
+    const tlLoader = gsap.timeline({
+        onComplete: () => {
+            gsap.to(".reveal-text", {
+                y: 0,
+                opacity: 1,
+                duration: 3.0,
+                ease: "expo.out"
+            });
+
+            gsap.to(".reveal-fade", {
+                y: 0,
+                opacity: 1,
+                duration: 3.0,
+                stagger: 0.3,
+                ease: "expo.out"
+            });
+        }
     });
 
-    gsap.to(".reveal-fade", {
-        y: 0,
+    tlLoader.to(".preloader-logo", {
         opacity: 1,
-        duration: 2.5,
-        stagger: 0.3,
-        ease: "power3.out",
-        delay: 0.5
-    });
+        duration: 1.5,
+        ease: "power2.inOut"
+    })
+    .to(".preloader-logo", {
+        opacity: 0,
+        duration: 1.0,
+        ease: "power2.inOut",
+        delay: 0.6
+    })
+    .to(".preloader", {
+        yPercent: -100,
+        duration: 1.8,
+        ease: "expo.inOut"
+    }, "-=0.5");
 
     // Scroll Reveals for other sections
-    const scrollRevealElements = document.querySelectorAll('.awards-section .reveal-fade, .clients-section .reveal-fade, .about-section .reveal-fade, .footer .reveal-fade');
-    
-    scrollRevealElements.forEach((el) => {
+    const revealElements = document.querySelectorAll('.reveal-fade:not(.hero-bottom *):not(.hero-title)');
+    revealElements.forEach((el) => {
         gsap.fromTo(el, 
-            { y: 50, opacity: 0 },
+            { y: 80, opacity: 0 },
             {
                 y: 0,
                 opacity: 1,
-                duration: 2.5,
-                ease: "power3.out",
+                duration: 3.0,
+                ease: "power4.out",
                 scrollTrigger: {
                     trigger: el,
-                    start: "top 90%",
+                    start: "top 85%",
                 }
             }
         );
     });
+
     // ==========================================
     // 5. MARQUEE ANIMATION
     // ==========================================
