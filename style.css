@@ -44,6 +44,23 @@
     opacity: 0;
 }
 
+/* MAGIC TEXT */
+.magic-word {
+    display: inline-block;
+    position: relative;
+}
+
+.magic-ghost {
+    opacity: 0.15;
+}
+
+.magic-real {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0.15;
+}
+
 body {
     background-color: var(--bg-dark);
     color: var(--text-light);

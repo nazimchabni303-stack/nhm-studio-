@@ -152,6 +152,36 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     // 5. MARQUEE ANIMATION
     // ==========================================
+    // ==========================================
+    // 4. MAGIC TEXT — Word-by-word scroll reveal
+    // ==========================================
+    document.querySelectorAll('.magic-text').forEach((el) => {
+        const text = el.textContent;
+        const words = text.split(' ');
+
+        // Replace content with individual word spans
+        el.innerHTML = words.map(word =>
+            `<span class="magic-word"><span class="magic-ghost">${word}</span><span class="magic-real">${word}</span></span>`
+        ).join(' ');
+
+        const wordSpans = el.querySelectorAll('.magic-real');
+
+        gsap.fromTo(wordSpans,
+            { opacity: 0.15 },
+            {
+                opacity: 1,
+                stagger: 0.08,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 85%",
+                    end: "bottom 60%",
+                    scrub: 1,
+                }
+            }
+        );
+    });
+
     const marqueeContent = document.querySelector('.marquee-content');
     if (marqueeContent) {
         // We have 4 items. We animate by -50% to seamless loop since items are identical.
