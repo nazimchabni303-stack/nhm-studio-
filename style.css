@@ -599,4 +599,12 @@ h1 {
     .giant-email {
         font-size: 15vw;
     }
+    
+    .cursor {
+        display: none !important;
+    }
+    
+    body {
+        cursor: auto !important;
+    }
 }
