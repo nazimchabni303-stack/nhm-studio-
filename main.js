@@ -93,33 +93,23 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateClock, 1000);
 
     // ==========================================
-    // 3. PRELOADER & INITIAL REVEALS
+    // 3. PRELOADER & SCROLL REVEALS
     // ==========================================
 
-    // Hero elements that animate after preloader ONLY
-    const heroElements = document.querySelectorAll('.hero .reveal-text, .hero .reveal-fade');
-    // Scroll elements that animate on scroll ONLY (everything outside hero)
-    const scrollElements = document.querySelectorAll('.reveal-fade:not(.hero .reveal-fade), .reveal-text:not(.hero .reveal-text)');
-
-    // Set all hidden from start
-    gsap.set(heroElements, { opacity: 0, y: 80 });
+    // Only hide elements OUTSIDE the hero section
+    const scrollElements = document.querySelectorAll(
+        '.work-section .reveal-fade, .work-section .reveal-text,' +
+        '.services-section .reveal-fade, .services-section .reveal-text,' +
+        '.awards-section .reveal-fade, .awards-section .reveal-text,' +
+        '.clients-section .reveal-fade, .clients-section .reveal-text,' +
+        '.about-section .reveal-fade, .about-section .reveal-text,' +
+        '.footer .reveal-fade, .footer .reveal-text'
+    );
     gsap.set(scrollElements, { opacity: 0, y: 80 });
 
-    // Preloader timeline
-    const tlLoader = gsap.timeline({
-        onComplete: () => {
-            // Only animate hero elements after preloader
-            gsap.to(heroElements, {
-                y: 0,
-                opacity: 1,
-                duration: 3.0,
-                stagger: 0.2,
-                ease: "expo.out"
-            });
-        }
-    });
-
-    tlLoader.to(".preloader-logo", {
+    // Preloader timeline (no hero animation — hero shows immediately)
+    gsap.timeline()
+    .to(".preloader-logo", {
         opacity: 1,
         duration: 1.5,
         ease: "power2.inOut"
@@ -136,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ease: "expo.inOut"
     }, "-=0.5");
 
-    // Scroll reveals for ALL sections outside hero — triggered ONCE cleanly
+    // Scroll reveals — triggered ONCE, cleanly
     scrollElements.forEach((el) => {
         gsap.fromTo(el,
             { y: 80, opacity: 0 },
@@ -148,17 +138,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 scrollTrigger: {
                     trigger: el,
                     start: "top 90%",
-                    toggleActions: "play none none none", // Plays once, never reverses
+                    toggleActions: "play none none none",
                 }
             }
         );
     });
 
-    // Refresh ScrollTrigger after all images load to prevent position bugs
+    // Refresh ScrollTrigger after images load
     window.addEventListener('load', () => {
         ScrollTrigger.refresh();
     });
-
 
     // ==========================================
     // 5. MARQUEE ANIMATION
