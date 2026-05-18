@@ -95,24 +95,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     // 3. PRELOADER & INITIAL REVEALS
     // ==========================================
-    
-    // Smooth reset for elements before animation to prevent jumps
-    gsap.set(".reveal-text, .reveal-fade", { opacity: 0, y: 80 });
 
+    // Hero elements that animate after preloader ONLY
+    const heroElements = document.querySelectorAll('.hero .reveal-text, .hero .reveal-fade');
+    // Scroll elements that animate on scroll ONLY (everything outside hero)
+    const scrollElements = document.querySelectorAll('.reveal-fade:not(.hero .reveal-fade), .reveal-text:not(.hero .reveal-text)');
+
+    // Set all hidden from start
+    gsap.set(heroElements, { opacity: 0, y: 80 });
+    gsap.set(scrollElements, { opacity: 0, y: 80 });
+
+    // Preloader timeline
     const tlLoader = gsap.timeline({
         onComplete: () => {
-            gsap.to(".reveal-text", {
+            // Only animate hero elements after preloader
+            gsap.to(heroElements, {
                 y: 0,
                 opacity: 1,
                 duration: 3.0,
-                ease: "expo.out"
-            });
-
-            gsap.to(".reveal-fade", {
-                y: 0,
-                opacity: 1,
-                duration: 3.0,
-                stagger: 0.3,
+                stagger: 0.2,
                 ease: "expo.out"
             });
         }
@@ -135,29 +136,29 @@ document.addEventListener('DOMContentLoaded', () => {
         ease: "expo.inOut"
     }, "-=0.5");
 
-    // Scroll Reveals for other sections
-    const revealElements = document.querySelectorAll('.reveal-fade:not(.hero-bottom *):not(.hero-title)');
-    revealElements.forEach((el) => {
-        gsap.fromTo(el, 
+    // Scroll reveals for ALL sections outside hero — triggered ONCE cleanly
+    scrollElements.forEach((el) => {
+        gsap.fromTo(el,
             { y: 80, opacity: 0 },
             {
                 y: 0,
                 opacity: 1,
-                duration: 3.0,
+                duration: 2.8,
                 ease: "power4.out",
                 scrollTrigger: {
                     trigger: el,
-                    start: "top 85%",
-                    once: true // Prevents bugs if scrolling up and down quickly
+                    start: "top 90%",
+                    toggleActions: "play none none none", // Plays once, never reverses
                 }
             }
         );
     });
 
-    // Refresh ScrollTrigger after all images load to fix positioning bugs
+    // Refresh ScrollTrigger after all images load to prevent position bugs
     window.addEventListener('load', () => {
         ScrollTrigger.refresh();
     });
+
 
     // ==========================================
     // 5. MARQUEE ANIMATION
