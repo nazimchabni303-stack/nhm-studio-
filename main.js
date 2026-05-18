@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. SMOOTH SCROLL (LENIS)
     // ==========================================
     const lenis = new Lenis({
-        duration: 1.2,
+        duration: 2.0,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
         smoothWheel: true
     });
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.to(".reveal-text", {
         y: 0,
         opacity: 1,
-        duration: 1.2,
+        duration: 2.0,
         ease: "power3.out",
         delay: 0.2
     });
@@ -104,8 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.to(".reveal-fade", {
         y: 0,
         opacity: 1,
-        duration: 1,
-        stagger: 0.1,
+        duration: 2.0,
+        stagger: 0.2,
         ease: "power3.out",
         delay: 0.5
     });
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 y: 0,
                 opacity: 1,
-                duration: 1,
+                duration: 2.0,
                 ease: "power3.out",
                 scrollTrigger: {
                     trigger: el,
