@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Cursor hover effects
-    const interactives = document.querySelectorAll('a, button, .project-row');
+    const interactives = document.querySelectorAll('a, button, .project-row, .gallery-item, .h-gallery-item');
     interactives.forEach((el) => {
         el.addEventListener('mouseenter', () => {
             gsap.to(cursor, { scale: 3, duration: 0.3, ease: "back.out(1.7)" });
@@ -62,24 +62,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // Calculate how far we need to translate the container
     // It's the total width of the container minus the viewport width
     function getScrollAmount() {
+        if (!projectContainer) return 0;
         let containerWidth = projectContainer.scrollWidth;
         return -(containerWidth - window.innerWidth);
     }
 
-    const tween = gsap.to(projectContainer, {
-        x: getScrollAmount,
-        ease: "none"
-    });
+    if (workSection && projectContainer) {
+        const tween = gsap.to(projectContainer, {
+            x: getScrollAmount,
+            ease: "none"
+        });
 
-    ScrollTrigger.create({
-        trigger: workSection,
-        start: "center center",
-        end: () => `+=${getScrollAmount() * -1}`, // Scroll distance equals translation distance
-        pin: true,
-        animation: tween,
-        scrub: 1, // Smooth scrub
-        invalidateOnRefresh: true // Recalculate on resize
-    });
+        ScrollTrigger.create({
+            trigger: workSection,
+            start: "center center",
+            end: () => `+=${getScrollAmount() * -1}`, // Scroll distance equals translation distance
+            pin: true,
+            animation: tween,
+            scrub: 1, // Smooth scrub
+            invalidateOnRefresh: true // Recalculate on resize
+        });
+    }
 
     // ==========================================
     // OTHERS: Clock & Reveals
@@ -107,24 +110,78 @@ document.addEventListener('DOMContentLoaded', () => {
     );
     gsap.set(scrollElements, { opacity: 0, y: 80 });
 
-    // Preloader timeline (no hero animation — hero shows immediately)
+    // Preloader timeline (fade in logo, then fade out screen)
+    // We want the preloader to show on load
+    gsap.set(".preloader", { pointerEvents: "all" });
+    
     gsap.timeline()
     .to(".preloader-logo", {
         opacity: 1,
-        duration: 1.5,
+        duration: 1.0,
         ease: "power2.inOut"
     })
     .to(".preloader-logo", {
         opacity: 0,
-        duration: 1.0,
+        duration: 0.8,
         ease: "power2.inOut",
-        delay: 0.6
+        delay: 0.3
     })
     .to(".preloader", {
         yPercent: -100,
-        duration: 1.8,
-        ease: "expo.inOut"
-    }, "-=0.5");
+        duration: 1.2,
+        ease: "expo.inOut",
+        onComplete: () => {
+            gsap.set(".preloader", { pointerEvents: "none", yPercent: 0, opacity: 0 }); // reset for transitions
+        }
+    }, "-=0.2");
+
+    // ==========================================
+    // PAGE TRANSITIONS
+    // ==========================================
+    const pageLinks = document.querySelectorAll('.page-link');
+    pageLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const targetUrl = link.getAttribute('href');
+            if(targetUrl) {
+                const targetPath = targetUrl.split('#')[0];
+                const currentPath = window.location.pathname;
+                
+                let isSamePage = false;
+                if (targetUrl.startsWith('#')) {
+                    isSamePage = true;
+                } else if (targetPath) {
+                    const normalizedTarget = targetPath.replace(/^\//, '').replace('index.html', '');
+                    const normalizedCurrent = currentPath.replace(/^\//, '').replace('index.html', '');
+                    if (normalizedTarget === normalizedCurrent) {
+                        isSamePage = true;
+                    }
+                }
+
+                if (!isSamePage) {
+                    e.preventDefault();
+                    
+                    // Show preloader
+                    gsap.set(".preloader", { opacity: 1, yPercent: 0, pointerEvents: "all", backgroundColor: "var(--bg-dark)" });
+                    gsap.timeline()
+                    .fromTo(".preloader", 
+                        { yPercent: 100 }, 
+                        { yPercent: 0, duration: 1.0, ease: "expo.inOut" }
+                    )
+                    .to(".preloader-logo", {
+                        opacity: 1,
+                        duration: 0.6,
+                        ease: "power2.inOut",
+                        onComplete: () => {
+                            window.location.href = targetUrl;
+                        }
+                    });
+                } else {
+                    // It's an anchor link on the same page, do nothing to allow native scroll/jump
+                    // BUT if we use Lenis, we can also smooth scroll it, but native is fine.
+                }
+            }
+        });
+    });
 
     // Scroll reveals — triggered ONCE, cleanly
     scrollElements.forEach((el) => {
@@ -217,6 +274,87 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }, 100);
             }
+        });
+    }
+
+    // ==========================================
+    // 6. INSPO SECTION INTERACTION
+    // ==========================================
+    const inspoGrid = document.querySelector('.inspo-grid');
+    const inspoFrames = document.querySelectorAll('.inspo-frame');
+    
+    if (inspoGrid && inspoFrames.length > 0) {
+        let currentIndex = -1;
+        
+        function animateRandomFrame() {
+            if (currentIndex !== -1) {
+                inspoFrames[currentIndex].classList.remove('is-hovered');
+            }
+            
+            for(let i=0; i<3; i++) {
+                inspoGrid.style.setProperty(`--r${i}`, '4fr');
+                inspoGrid.style.setProperty(`--c${i}`, '4fr');
+            }
+            
+            let nextIndex = Math.floor(Math.random() * inspoFrames.length);
+            while (nextIndex === currentIndex && inspoFrames.length > 1) {
+                nextIndex = Math.floor(Math.random() * inspoFrames.length);
+            }
+            currentIndex = nextIndex;
+            
+            const frame = inspoFrames[currentIndex];
+            const r = frame.getAttribute('data-row');
+            const c = frame.getAttribute('data-col');
+            
+            inspoGrid.style.setProperty(`--r${r}`, '7fr');
+            inspoGrid.style.setProperty(`--c${c}`, '7fr');
+            frame.classList.add('is-hovered');
+        }
+
+        setInterval(animateRandomFrame, 2000);
+        setTimeout(animateRandomFrame, 200);
+    }// ==========================================
+    // 7. HORIZONTAL GALLERY (INSPO PAGE)
+    // ==========================================
+    const horizontalGalleryWrapper = document.querySelector('.horizontal-gallery-wrapper');
+    const horizontalGalleryContainer = document.querySelector('.horizontal-gallery-container');
+
+    if (horizontalGalleryWrapper && horizontalGalleryContainer) {
+        function getGalleryScrollAmount() {
+            let containerWidth = horizontalGalleryContainer.scrollWidth;
+            return -(containerWidth - window.innerWidth);
+        }
+
+        const hTween = gsap.to(horizontalGalleryContainer, {
+            x: getGalleryScrollAmount,
+            ease: "none"
+        });
+
+        ScrollTrigger.create({
+            trigger: horizontalGalleryWrapper,
+            start: "center center",
+            end: () => `+=${getGalleryScrollAmount() * -1}`, 
+            pin: true,
+            animation: hTween,
+            scrub: 2.5, // Cinematic progressive scroll inertia
+            invalidateOnRefresh: true
+        });
+
+        // Cinematic progressive reveal for horizontal items
+        const hItems = gsap.utils.toArray('.h-gallery-item, .h-text-item:not(.intro-block)');
+        hItems.forEach((item) => {
+            gsap.from(item, {
+                opacity: 0,
+                scale: 0.85,
+                filter: "blur(15px)",
+                scrollTrigger: {
+                    trigger: item,
+                    start: "left 100%",
+                    end: "left 50%",
+                    containerAnimation: hTween,
+                    scrub: 1 // Ties the animation exactly to the scroll position
+                }
+            });
         });
     }
 

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NHM Studio | Architecture & Design d'Intérieur à Chéraga</title>
     <meta name="description" content="NHM Studio conçoit des espaces et du mobilier sur mesure au style contemporain et intemporel à Chéraga, Alger.">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css?v=4">
     
     <!-- GSAP & ScrollTrigger -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
@@ -29,9 +29,10 @@
             <img src="nhm_studio_transparent.png" alt="NHM Studio" class="logo">
         </a>
         <nav class="nav">
-            <a href="#work" class="nav-item barrel-link" data-text="Work"><span>Work</span></a>
-            <a href="#about" class="nav-item barrel-link" data-text="About"><span>About</span></a>
-            <a href="#contact" class="nav-item barrel-link" data-text="Contact"><span>Contact</span></a>
+            <a href="index.html#work" class="nav-item barrel-link page-link" data-text="Work"><span>Work</span></a>
+            <a href="index.html#about" class="nav-item barrel-link page-link" data-text="About"><span>About</span></a>
+            <a href="inspo.html" class="nav-item barrel-link page-link" data-text="Inspo"><span>Inspo</span></a>
+            <a href="index.html#contact" class="nav-item barrel-link page-link" data-text="Contact"><span>Contact</span></a>
         </nav>
         <div class="header-time">
             <span id="time">--:-- --</span> <span class="location">Alger, DZ</span>
@@ -161,6 +162,64 @@
         </div>
     </section>
     
+    <section class="inspo-section" id="inspo">
+        <div class="section-header">
+            <h2 class="section-title reveal-fade">Inspiration</h2>
+        </div>
+        <div class="inspo-container reveal-fade">
+            <div class="inspo-grid">
+                <div class="inspo-frame" data-row="0" data-col="0">
+                    <div class="inspo-video-wrapper">
+                        <img src="INSPO/SnapInsta.to_476062885_17931813519002358_3126451500607201817_n.jpg" alt="Inspo 1" class="inspo-image">
+                    </div>
+                </div>
+                <div class="inspo-frame" data-row="0" data-col="1">
+                    <div class="inspo-video-wrapper">
+                        <img src="INSPO/SnapInsta.to_476073033_17931813531002358_6710071514405045828_n.jpg" alt="Inspo 2" class="inspo-image">
+                    </div>
+                </div>
+                <div class="inspo-frame" data-row="0" data-col="2">
+                    <div class="inspo-video-wrapper">
+                        <img src="INSPO/SnapInsta.to_476127182_17931813540002358_5613199566887982821_n.jpg" alt="Inspo 3" class="inspo-image">
+                    </div>
+                </div>
+                <div class="inspo-frame" data-row="1" data-col="0">
+                    <div class="inspo-video-wrapper">
+                        <img src="INSPO/SnapInsta.to_476223283_17931813558002358_4046367886683807887_n.jpg" alt="Inspo 4" class="inspo-image">
+                    </div>
+                </div>
+                <div class="inspo-frame" data-row="1" data-col="1">
+                    <div class="inspo-video-wrapper">
+                        <img src="INSPO/SnapInsta.to_476294372_17931813576002358_4426608410917647967_n.jpg" alt="Inspo 5" class="inspo-image">
+                    </div>
+                </div>
+                <div class="inspo-frame" data-row="1" data-col="2">
+                    <div class="inspo-video-wrapper">
+                        <img src="INSPO/SnapInsta.to_476296453_17931813549002358_4248994320953208846_n.jpg" alt="Inspo 6" class="inspo-image">
+                    </div>
+                </div>
+                <div class="inspo-frame" data-row="2" data-col="0">
+                    <div class="inspo-video-wrapper">
+                        <img src="INSPO/SnapInsta.to_504344746_17948290959002358_6017495101161343746_n.jpg" alt="Inspo 7" class="inspo-image">
+                    </div>
+                </div>
+                <div class="inspo-frame" data-row="2" data-col="1">
+                    <div class="inspo-video-wrapper">
+                        <img src="INSPO/SnapInsta.to_511454331_17948290998002358_8963234005829474382_n.jpg" alt="Inspo 8" class="inspo-image">
+                    </div>
+                </div>
+                <div class="inspo-frame" data-row="2" data-col="2">
+                    <div class="inspo-video-wrapper">
+                        <img src="INSPO/SnapInsta.to_511529432_17948291007002358_3142595341973799443_n.jpg" alt="Inspo 9" class="inspo-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="inspo-cta reveal-fade" style="display: flex; justify-content: center; margin-top: 60px; margin-bottom: 40px;">
+            <a href="inspo.html" class="preview-label page-link" style="text-transform: uppercase; font-size: 14px; border: 1px solid var(--text-light); padding: 12px 24px; border-radius: 40px; transition: background 0.3s, color 0.3s; display: inline-block;">View Full Gallery ⁕</a>
+        </div>
+    </section>
+
     <div class="about-wrapper">
         <section class="about-section" id="about">
             <div class="about-content reveal-fade">
@@ -217,6 +276,6 @@
     </div>
 </main>
 
-<script src="./main.js"></script>
+<script src="./main.js?v=4"></script>
 </body>
 </html>

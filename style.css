@@ -6,13 +6,13 @@
 }
 
 :root {
-    --bg-dark: rgb(13, 13, 13);
-    --text-light: rgb(237, 237, 237);
-    --text-dim: #888888;
-    --border-color: rgba(255, 255, 255, 0.15);
-    --accent-red: #ff3333;
-    --bg-light: #e5e5e5;
-    --text-dark: #000000;
+    --bg-dark: #1A181A;
+    --text-light: #E6E2D6;
+    --text-dim: #C2BCA9;
+    --border-color: #2C1917;
+    --accent-red: #6A2120;
+    --bg-light: #E6E2D6;
+    --text-dark: #1A181A;
     
     --font-heading: 'Recoleta', serif;
     --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -31,11 +31,12 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    background: #000;
-    z-index: 9999;
+    background: var(--bg-dark);
+    z-index: 99999;
     display: flex;
     justify-content: center;
     align-items: center;
+    pointer-events: none; /* Make it invisible to clicks when fading out */
 }
 
 .preloader-logo {
@@ -295,6 +296,7 @@ h1 {
     font-family: var(--font-heading);
     font-size: 32px;
     font-weight: 400;
+    color: var(--accent-red);
 }
 
 .featured-count {
@@ -432,6 +434,76 @@ h1 {
     color: var(--text-dim);
 }
 
+/* --- Inspo Section --- */
+.inspo-section {
+    padding: 100px 0;
+}
+
+.inspo-container {
+    padding: 0 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 80vh; /* Adjust as needed */
+}
+
+.inspo-grid {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    gap: 8px;
+    grid-template-rows: var(--r0, 4fr) var(--r1, 4fr) var(--r2, 4fr);
+    grid-template-columns: var(--c0, 4fr) var(--c1, 4fr) var(--c2, 4fr);
+    transition: grid-template-rows 0.6s cubic-bezier(0.25, 1, 0.5, 1), grid-template-columns 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.inspo-frame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 4px;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    cursor: pointer;
+}
+
+/* Specific Transform Origins based on grid position */
+.inspo-frame[data-row="0"][data-col="0"] { transform-origin: top left; }
+.inspo-frame[data-row="0"][data-col="1"] { transform-origin: top center; }
+.inspo-frame[data-row="0"][data-col="2"] { transform-origin: top right; }
+.inspo-frame[data-row="1"][data-col="0"] { transform-origin: center left; }
+.inspo-frame[data-row="1"][data-col="1"] { transform-origin: center center; }
+.inspo-frame[data-row="1"][data-col="2"] { transform-origin: center right; }
+.inspo-frame[data-row="2"][data-col="0"] { transform-origin: bottom left; }
+.inspo-frame[data-row="2"][data-col="1"] { transform-origin: bottom center; }
+.inspo-frame[data-row="2"][data-col="2"] { transform-origin: bottom right; }
+
+.inspo-video-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    border: 0px solid transparent;
+}
+
+.inspo-frame.is-hovered .inspo-video-wrapper {
+    border: 4px solid var(--text-dim);
+    transform: scale(0.96); /* Creates a subtle framing effect */
+}
+
+.inspo-video-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .inspo-container {
+        height: calc(100vw - 40px);
+        max-height: 500px;
+    }
+}
+
 /* --- About & Footer Wrapper --- */
 .about-wrapper {
     background-color: var(--bg-light);
@@ -458,12 +530,13 @@ h1 {
     font-size: clamp(32px, 4vw, 48px);
     line-height: 1.2;
     font-weight: 400;
+    color: var(--accent-red);
 }
 
 .about-text {
     font-size: 16px;
     line-height: 1.6;
-    color: #333;
+    color: var(--text-dark);
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -584,7 +657,7 @@ h1 {
     .header-time { display: none; }
     .hero { padding: 120px 20px 40px; }
     .section-header, .section-header-horizontal { padding: 0 20px 24px; margin: 0 20px 40px; }
-    .project-container, .awards-list, .clients-grid, .about-section, .footer {
+    .project-container, .awards-list, .clients-grid, .about-section, .footer, .inspo-container {
         padding-left: 20px;
         padding-right: 20px;
     }
@@ -625,3 +698,141 @@ h1 {
         cursor: auto !important;
     }
 }
+
+/* --- Inspo Page Styles --- */
+.inspo-hero {
+    padding: 180px 40px 60px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.inspo-hero h1 {
+    font-size: clamp(48px, 8vw, 120px);
+    margin-bottom: 24px;
+    color: var(--accent-red);
+}
+
+.inspo-hero p {
+    font-size: 18px;
+    color: var(--text-dim);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.inspo-cta a:hover {
+    background: var(--text-light) !important;
+    color: var(--bg-dark) !important;
+}
+
+/* --- HORIZONTAL GALLERY (INSPO PAGE) --- */
+.horizontal-gallery-wrapper {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--bg-dark);
+}
+
+.horizontal-gallery-container {
+    display: flex;
+    width: max-content;
+    height: 60vh;
+    padding-left: 10vw;
+    will-change: transform;
+    align-items: center;
+}
+
+.h-gallery-item {
+    position: relative;
+    width: 40vw; /* Base width */
+    height: 100%;
+    margin-right: 4vw;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.h-gallery-item:nth-child(even) {
+    height: 80%; /* Varied height to match abvtek aesthetic */
+}
+
+.h-gallery-item:nth-child(3n) {
+    height: 90%;
+    width: 30vw;
+}
+
+.h-text-item {
+    width: 35vw;
+    height: 100%;
+    margin-right: 4vw;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 40px;
+}
+
+.h-text-item h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(24px, 6vw, 64px);
+    color: var(--accent-red);
+    margin-bottom: 24px;
+    line-height: 1.1;
+}
+
+.h-text-item p {
+    font-size: clamp(16px, 1.5vw, 24px);
+    color: var(--text-dim);
+    line-height: 1.6;
+    max-width: 400px;
+}
+
+.intro-block {
+    width: 60vw;
+}
+
+.intro-block h1 {
+    font-size: clamp(32px, 8vw, 120px);
+    color: var(--accent-red);
+    margin-bottom: 24px;
+    line-height: 1;
+    font-family: var(--font-heading);
+}
+
+.intro-block p {
+    font-size: clamp(18px, 2vw, 32px);
+    max-width: 800px;
+}
+
+.h-gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.h-gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .h-gallery-item {
+        width: 80vw;
+        height: 60vh !important;
+        margin-right: 20px;
+    }
+    .h-text-item, .intro-block {
+        width: 85vw;
+        padding: 0 20px;
+        margin-right: 20px;
+    }
+    .horizontal-gallery-container {
+        height: 60vh;
+    }
+}
+
+
