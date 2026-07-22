@@ -6,6 +6,9 @@
     <title>NHM Studio | Architecture & Design d'Intérieur à Chéraga</title>
     <meta name="description" content="NHM Studio conçoit des espaces et du mobilier sur mesure au style contemporain et intemporel à Chéraga, Alger.">
     <link rel="stylesheet" href="./style.css?v=4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     
     <!-- GSAP & ScrollTrigger -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
@@ -29,32 +32,105 @@
             <img src="nhm_studio_transparent.png" alt="NHM Studio" class="logo">
         </a>
         <nav class="nav">
-            <a href="index.html#work" class="nav-item barrel-link page-link" data-text="Work"><span>Work</span></a>
-            <a href="index.html#about" class="nav-item barrel-link page-link" data-text="About"><span>About</span></a>
-            <a href="inspo.html" class="nav-item barrel-link page-link" data-text="Inspo"><span>Inspo</span></a>
-            <a href="index.html#contact" class="nav-item barrel-link page-link" data-text="Contact"><span>Contact</span></a>
+            <a href="realisations.html" class="nav-item barrel-link" data-text="Réalisations"><span>Réalisations</span></a>
+            <a href="about.html" class="nav-item barrel-link" data-text="Notre Histoire"><span>Notre Histoire</span></a>
+            <a href="magazine.html" class="nav-item barrel-link" data-text="Magazine"><span>Magazine</span></a>
+            <a href="inspo.html" class="nav-item barrel-link" data-text="Inspo"><span>Inspo</span></a>
+            <a href="index.html#contact" class="nav-item barrel-link" data-text="Contact"><span>Contact</span></a>
+            <a href="atelier-showroom.html" class="nav-item barrel-link nav-atelier" data-text="L'Atelier"><span>L'Atelier</span></a>
         </nav>
+        <button class="mobile-menu-btn">Menu</button>
         <div class="header-time">
             <span id="time">--:-- --</span> <span class="location">Alger, DZ</span>
         </div>
     </div>
 </header>
 
+<!-- Mobile Magazine Menu Overlay -->
+<div class="mobile-menu-overlay">
+    <div class="mobile-menu-header-bar">
+        <span class="menu-title" style="font-family: var(--font-body); font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dim);">Navigation</span>
+        <button class="mobile-menu-close">Fermer ✕</button>
+    </div>
+    <div class="mobile-menu-scroll">
+        <!-- Item 1 -->
+        <a href="index.html" class="mobile-menu-item layout-left">
+            <div class="menu-item-img">
+                <img src="photo du studio/IMG_6451.webp" alt="Accueil">
+            </div>
+            <div class="menu-item-text">
+                <span class="menu-cat">01 / Studio</span>
+                <h2>Accueil</h2>
+            </div>
+        </a>
+        <!-- Item 2 -->
+        <a href="realisations.html" class="mobile-menu-item layout-right">
+            <div class="menu-item-text">
+                <span class="menu-cat">02 / Portfolio</span>
+                <h2>Réalisations</h2>
+            </div>
+            <div class="menu-item-img">
+                <img src="travail et réalisations/Aura nails Paris/Scene 1.webp" alt="Réalisations">
+            </div>
+        </a>
+        <!-- Item 3 -->
+        <a href="atelier-showroom.html" class="mobile-menu-item layout-full">
+            <div class="menu-item-img">
+                <img src="travail et réalisations/bedroom amimar/Image(1).webp" alt="L'Atelier">
+            </div>
+            <div class="menu-item-text">
+                <span class="menu-cat">03 / Design</span>
+                <h2>L'Atelier</h2>
+            </div>
+        </a>
+        <!-- Item 4 -->
+        <a href="about.html" class="mobile-menu-item layout-left">
+            <div class="menu-item-img">
+                <img src="photo du studio/IMG_5987.webp" alt="Notre Histoire">
+            </div>
+            <div class="menu-item-text">
+                <span class="menu-cat">04 / Agence</span>
+                <h2>Notre Histoire</h2>
+            </div>
+        </a>
+        <!-- Item 5 -->
+        <a href="magazine.html" class="mobile-menu-item layout-right">
+            <div class="menu-item-text">
+                <span class="menu-cat">05 / Éditorial</span>
+                <h2>Magazine</h2>
+            </div>
+            <div class="menu-item-img">
+                <img src="photos/project3.jpg" alt="Magazine">
+            </div>
+        </a>
+        <!-- Item 6 -->
+        <a href="inspo.html" class="mobile-menu-item layout-full">
+            <div class="menu-item-img">
+                <img src="INSPO/SnapInsta.to_513742876_17948290989002358_7056905744541463107_n.jpg" alt="Inspo">
+            </div>
+            <div class="menu-item-text">
+                <span class="menu-cat">06 / Moodboard</span>
+                <h2>Inspiration</h2>
+            </div>
+        </a>
+    </div>
+</div>
+
+
 <main>
     <section class="hero" id="home">
       <div class="hero-inner">
         <div class="hero-text">
           <h1>
-            <span class="hero-line">Studio de Design</span>
-            <span class="hero-line">Créant des Espaces</span>
-            <span class="hero-line"><em class="accent">&</em> du Mobilier</span>
-            <span class="hero-line"><em class="accent">sur mesure</em></span>
+            <span class="hero-line">Studio d'architecture</span>
+            <span class="hero-line">et de design</span>
+            <span class="hero-line"><em class="accent">d'intérieur</em></span>
           </h1>
         </div>
         <div class="hero-preview">
           <a href="#work" class="preview-card">
             <span class="preview-label">Latest Work ⁕</span>
-            <img src="photos/project1.jpg" alt="Dernier projet NHM Studio">
+            <img src="photo du studio/IMG_6451.webp" alt="Dernier projet NHM Studio">
           </a>
         </div>
       </div>
@@ -65,33 +141,33 @@
       </div>
     </section>
 
-    <!-- HORIZONTAL WORK SECTION -->
+    <!-- PORTFOLIO SECTION -->
     <section class="work-section" id="work">
         <div class="section-header-horizontal">
-            <h2 class="section-title">Architecture & Design</h2>
-            <span class="featured-count">Featured Work (3)</span>
+            <h2 class="section-title reveal-fade">Travaux & Réalisations</h2>
+            <div class="featured-count reveal-fade">05 Projects</div>
         </div>
 
         <div class="project-container">
             <!-- Project 1 -->
-            <div class="project-row">
+            <a href="realisations.html#aura" class="project-row atelier-row-link">
                 <div class="project-info-left">
-                    <h3>Design Résidentiel</h3>
+                    <h3>Aura Nails Paris <span class="arrow">→</span></h3>
                 </div>
                 <div class="project-image-center">
                     <div class="image-wrapper">
-                        <img src="photos/project2.jpg" alt="Design Résidentiel" class="parallax-image">
+                        <img src="travail et réalisations/Aura nails Paris/Scene 1.webp" alt="Aura Nails" class="parallax-image">
                     </div>
                 </div>
                 <div class="project-info-right">
-                    <p>Design & Architecture</p>
+                    <p>Design & Aménagement</p>
                 </div>
-            </div>
+            </a>
 
             <!-- Project 2 -->
-            <div class="project-row">
+            <a href="atelier-showroom.html" onclick="window.location.href='atelier-showroom.html';" class="project-row atelier-row-link">
                 <div class="project-info-left">
-                    <h3>Mobilier Sur Mesure</h3>
+                    <h3>Mobilier Sur Mesure <span class="arrow">→</span></h3>
                 </div>
                 <div class="project-image-center">
                     <div class="image-wrapper">
@@ -101,22 +177,22 @@
                 <div class="project-info-right">
                     <p>Conception & Fabrication</p>
                 </div>
-            </div>
+            </a>
 
              <!-- Project 3 -->
-            <div class="project-row">
+            <a href="realisations.html#bouillon" class="project-row atelier-row-link">
                 <div class="project-info-left">
-                    <h3>Aménagement Commercial</h3>
+                    <h3>Bouillon Paris <span class="arrow">→</span></h3>
                 </div>
                 <div class="project-image-center">
                     <div class="image-wrapper">
-                        <img src="photos/project4.jpg" alt="Aménagement Commercial" class="parallax-image">
+                        <img src="travail et réalisations/Boullion paris/Scène 2.webp" alt="Bouillon Paris" class="parallax-image">
                     </div>
                 </div>
                 <div class="project-info-right">
                     <p>Visualisation 3D</p>
                 </div>
-            </div>
+            </a>
         </div>
     </section>
     
@@ -148,17 +224,77 @@
         </div>
     </section>
 
-     <section class="clients-section">
-        <div class="section-header">
-            <h2 class="section-title reveal-fade">Partenaires & Marques</h2>
-        </div>
-        <div class="clients-grid reveal-fade">
-            <div class="client-logo">Design</div>
-            <div class="client-logo">Architecture</div>
-            <div class="client-logo">Interior</div>
-            <div class="client-logo">Furniture</div>
-            <div class="client-logo">3D Render</div>
-            <div class="client-logo">Studio</div>
+    <section class="zoom-parallax-section" id="magazine">
+        <div class="zoom-parallax-container">
+            <div class="zoom-parallax-sticky">
+                <!-- 7 Zoom Parallax Image Layers -->
+                <div class="zoom-image-layer layer-0">
+                    <div class="zoom-image-box">
+                        <img src="photo du studio/IMG_6451.webp" alt="NHM Studio Center">
+                    </div>
+                </div>
+                <div class="zoom-image-layer layer-1">
+                    <div class="zoom-image-box">
+                        <img src="photo du studio/IMG_6449.webp" alt="L'Atelier NHM">
+                    </div>
+                </div>
+                <div class="zoom-image-layer layer-2">
+                    <div class="zoom-image-box">
+                        <img src="photo du studio/IMG_6452.webp" alt="Design d'Intérieur">
+                    </div>
+                </div>
+                <div class="zoom-image-layer layer-3">
+                    <div class="zoom-image-box">
+                        <img src="photo du studio/IMG_5987.webp" alt="Mobilier Sur Mesure">
+                    </div>
+                </div>
+                <div class="zoom-image-layer layer-4">
+                    <div class="zoom-image-box">
+                        <img src="photo du studio/IMG_6450.webp" alt="Matières & Finitions">
+                    </div>
+                </div>
+                <div class="zoom-image-layer layer-5">
+                    <div class="zoom-image-box">
+                        <img src="photo du studio/IMG_5988.webp" alt="Atmosphères">
+                    </div>
+                </div>
+                <div class="zoom-image-layer layer-6">
+                    <div class="zoom-image-box">
+                        <img src="photo du studio/IMG_6453.webp" alt="Projets 3D">
+                    </div>
+                </div>
+
+                <!-- Articles Overlay (appears on scroll zoom) -->
+                <div class="zoom-articles-overlay">
+                    <div class="zoom-articles-header">
+                        <span class="magazine-tag" style="font-size: 13px;">NHM Magazine ⁕ Éditorial</span>
+                        <h2 class="section-title" style="margin-top: 8px;">Revue d'Architecture & Mobilier d'Exception</h2>
+                    </div>
+                    <div class="zoom-articles-grid">
+                        <a href="magazine.html#article-1" class="zoom-article-card">
+                            <span class="magazine-tag">Savoir-Faire</span>
+                            <h3>Au cœur de l'Atelier</h3>
+                            <p>Fabrication artisanale & recherche constante des formes intemporelles à Chéraga.</p>
+                            <span class="read-more">Découvrir le dossier →</span>
+                        </a>
+                        <a href="magazine.html#article-2" class="zoom-article-card">
+                            <span class="magazine-tag">Architecture</span>
+                            <h3>Volumes & Lumière</h3>
+                            <p>Composer des intérieurs chaleureux aux lignes contemporaines et feutrées.</p>
+                            <span class="read-more">Découvrir le dossier →</span>
+                        </a>
+                        <a href="magazine.html#article-3" class="zoom-article-card">
+                            <span class="magazine-tag">Mobilier</span>
+                            <h3>Bois Noble & Épure</h3>
+                            <p>Conception et finitions sur-mesure adaptées à chaque projet d'exception.</p>
+                            <span class="read-more">Découvrir le dossier →</span>
+                        </a>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <a href="magazine.html" class="preview-label page-link" style="text-transform: uppercase; font-size: 13px; padding: 12px 28px;">Explorer le Magazine complet ⁕</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     
@@ -228,8 +364,10 @@
                 </h2>
                 <div class="about-text">
                     <p>Basé à Chéraga, à Alger, près de Dar Diaf, le studio développe des espaces et des pièces sur mesure à travers une approche contemporaine, élégante et pensée dans le détail.</p>
-                    <p>Entre architecture, design d’intérieur et création de mobilier sur mesure, NHM Studio imagine des lieux durables, raffinés et singuliers. Chaque projet cherche un équilibre entre fonctionnalité, matière et identité visuelle.</p>
-                    <p>Notre approche est globale : de la conception 2D/3D à l'accompagnement personnalisé, nous créons des espaces qui reflètent l'identité de nos clients tout en respectant notre signature esthétique.</p>
+                    <p>Entre architecture, design d’intérieur et création de mobilier sur mesure, NHM Studio imagine des lieux durables, raffinés et singuliers.</p>
+                    <div style="margin-top: 40px;">
+                        <a href="about.html" class="btn-primary" style="display: inline-block; text-decoration: none;">En savoir plus sur nous</a>
+                    </div>
                 </div>
                 
                 <div class="profile-image">

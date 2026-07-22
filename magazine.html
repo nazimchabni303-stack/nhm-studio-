@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NHM Studio | Magazine</title>
+    <link rel="stylesheet" href="./style.css?v=7">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/ScrollTrigger.min.js"></script>
+    
+    <!-- Lenis for Smooth Scroll -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+
+    <style>
+        .magazine-header {
+            padding: 150px 40px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .magazine-header h1 {
+            font-family: var(--font-heading);
+            font-size: 6vw;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+        
+        .magazine-header p {
+            font-size: 18px;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .magazine-article {
+            padding: 80px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 40px;
+            align-items: center;
+        }
+
+        .mag-text-content {
+            grid-column: span 5;
+        }
+
+        .mag-image-content {
+            grid-column: span 7;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .magazine-article.reverse .mag-text-content {
+            grid-column: 8 / 13;
+            grid-row: 1;
+        }
+
+        .magazine-article.reverse .mag-image-content {
+            grid-column: 1 / 7;
+            grid-row: 1;
+        }
+
+        .mag-category {
+            font-family: var(--font-body);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-red, #C1A279);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .mag-title {
+            font-family: var(--font-heading);
+            font-size: 48px;
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            color: var(--text-color);
+        }
+
+        .mag-desc {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text-dim);
+        }
+
+        .mag-image-content img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            transition: transform 0.6s var(--transition, cubic-bezier(0.25, 1, 0.5, 1));
+        }
+
+        .mag-image-content:hover img {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .magazine-header h1 {
+                font-size: 42px;
+            }
+            .magazine-article {
+                display: flex;
+                flex-direction: column;
+                padding: 60px 20px;
+            }
+            .mag-text-content, .mag-image-content {
+                width: 100%;
+            }
+            .mag-image-content img {
+                height: 400px;
+            }
+            .magazine-article.reverse {
+                flex-direction: column-reverse;
+            }
+            .magazine-article.reverse .mag-text-content {
+                padding-top: 40px;
+                padding-right: 0;
+            }
+        }
+    </style>
+</head>
+<body class="magazine-page">
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo-link">
+                <img src="nhm_studio_transparent.png" alt="NHM Studio" class="logo">
+            </a>
+            <nav class="nav">
+                <a href="realisations.html" class="nav-item barrel-link" data-text="Réalisations"><span>Réalisations</span></a>
+                <a href="about.html" class="nav-item barrel-link" data-text="Notre Histoire"><span>Notre Histoire</span></a>
+                <a href="magazine.html" class="nav-item barrel-link" data-text="Magazine"><span>Magazine</span></a>
+                <a href="inspo.html" class="nav-item barrel-link" data-text="Inspo"><span>Inspo</span></a>
+                <a href="index.html#contact" class="nav-item barrel-link" data-text="Contact"><span>Contact</span></a>
+                <a href="atelier-showroom.html" class="nav-item barrel-link nav-atelier" data-text="L'Atelier"><span>L'Atelier</span></a>
+            </nav>
+        <button class="mobile-menu-btn">Menu</button>
+            <div class="header-time">
+                <span id="time">--:-- --</span> <span class="location">Alger, DZ</span>
+            </div>
+        </div>
+    </header>
+
+<!-- Mobile Magazine Menu Overlay -->
+<div class="mobile-menu-overlay">
+    <div class="mobile-menu-header-bar">
+        <span class="menu-title" style="font-family: var(--font-body); font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dim);">Navigation</span>
+        <button class="mobile-menu-close">Fermer ✕</button>
+    </div>
+    <div class="mobile-menu-scroll">
+        <!-- Item 1 -->
+        <a href="index.html" class="mobile-menu-item layout-left">
+            <div class="menu-item-img">
+                <img src="photo du studio/IMG_6451.webp" alt="Accueil">
+            </div>
+            <div class="menu-item-text">
+                <span class="menu-cat">01 / Studio</span>
+                <h2>Accueil</h2>
+            </div>
+        </a>
+        <!-- Item 2 -->
+        <a href="realisations.html" class="mobile-menu-item layout-right">
+            <div class="menu-item-text">
+                <span class="menu-cat">02 / Portfolio</span>
+                <h2>Réalisations</h2>
+            </div>
+            <div class="menu-item-img">
+                <img src="travail et réalisations/Aura nails Paris/Scene 1.webp" alt="Réalisations">
+            </div>
+        </a>
+        <!-- Item 3 -->
+        <a href="atelier-showroom.html" class="mobile-menu-item layout-full">
+            <div class="menu-item-img">
+                <img src="travail et réalisations/bedroom amimar/Image(1).webp" alt="L'Atelier">
+            </div>
+            <div class="menu-item-text">
+                <span class="menu-cat">03 / Design</span>
+                <h2>L'Atelier</h2>
+            </div>
+        </a>
+        <!-- Item 4 -->
+        <a href="about.html" class="mobile-menu-item layout-left">
+            <div class="menu-item-img">
+                <img src="photo du studio/IMG_5987.webp" alt="Notre Histoire">
+            </div>
+            <div class="menu-item-text">
+                <span class="menu-cat">04 / Agence</span>
+                <h2>Notre Histoire</h2>
+            </div>
+        </a>
+        <!-- Item 5 -->
+        <a href="magazine.html" class="mobile-menu-item layout-right">
+            <div class="menu-item-text">
+                <span class="menu-cat">05 / Éditorial</span>
+                <h2>Magazine</h2>
+            </div>
+            <div class="menu-item-img">
+                <img src="photos/project3.jpg" alt="Magazine">
+            </div>
+        </a>
+        <!-- Item 6 -->
+        <a href="inspo.html" class="mobile-menu-item layout-full">
+            <div class="menu-item-img">
+                <img src="INSPO/SnapInsta.to_513742876_17948290989002358_7056905744541463107_n.jpg" alt="Inspo">
+            </div>
+            <div class="menu-item-text">
+                <span class="menu-cat">06 / Moodboard</span>
+                <h2>Inspiration</h2>
+            </div>
+        </a>
+    </div>
+</div>
+
+
+    <main>
+        <section class="zoom-parallax-section" id="magazine-hero">
+            <div class="zoom-parallax-container">
+                <div class="zoom-parallax-sticky">
+                    <!-- 7 Zoom Parallax Image Layers -->
+                    <div class="zoom-image-layer layer-0">
+                        <div class="zoom-image-box">
+                            <img src="photo du studio/IMG_6451.webp" alt="NHM Studio Center">
+                        </div>
+                    </div>
+                    <div class="zoom-image-layer layer-1">
+                        <div class="zoom-image-box">
+                            <img src="photo du studio/IMG_6449.webp" alt="L'Atelier NHM">
+                        </div>
+                    </div>
+                    <div class="zoom-image-layer layer-2">
+                        <div class="zoom-image-box">
+                            <img src="photo du studio/IMG_6452.webp" alt="Design d'Intérieur">
+                        </div>
+                    </div>
+                    <div class="zoom-image-layer layer-3">
+                        <div class="zoom-image-box">
+                            <img src="photo du studio/IMG_5987.webp" alt="Mobilier Sur Mesure">
+                        </div>
+                    </div>
+                    <div class="zoom-image-layer layer-4">
+                        <div class="zoom-image-box">
+                            <img src="photo du studio/IMG_6450.webp" alt="Matières & Finitions">
+                        </div>
+                    </div>
+                    <div class="zoom-image-layer layer-5">
+                        <div class="zoom-image-box">
+                            <img src="photo du studio/IMG_5988.webp" alt="Atmosphères">
+                        </div>
+                    </div>
+                    <div class="zoom-image-layer layer-6">
+                        <div class="zoom-image-box">
+                            <img src="photo du studio/IMG_6453.webp" alt="Projets 3D">
+                        </div>
+                    </div>
+
+                    <!-- Articles Overlay (appears on scroll zoom) -->
+                    <div class="zoom-articles-overlay">
+                        <div class="zoom-articles-header">
+                            <span class="magazine-tag" style="font-size: 13px;">NHM Magazine ⁕ Éditorial</span>
+                            <h2 class="section-title" style="margin-top: 8px;">Revue d'Architecture & Mobilier d'Exception</h2>
+                        </div>
+                        <div class="zoom-articles-grid">
+                            <a href="#luxe-artisanal" class="zoom-article-card">
+                                <span class="magazine-tag">Éditorial</span>
+                                <h3>Luxe Artisanal</h3>
+                                <p>Plongez dans l'univers du luxe et de l'élégance redéfinie.</p>
+                                <span class="read-more">Lire l'article →</span>
+                            </a>
+                            <a href="#pieces-uniques" class="zoom-article-card">
+                                <span class="magazine-tag">Mobilier</span>
+                                <h3>Pièces Uniques</h3>
+                                <p>L'art de l'exclusivité et la conception sur-mesure.</p>
+                                <span class="read-more">Lire l'article →</span>
+                            </a>
+                            <a href="#savoir-faire" class="zoom-article-card">
+                                <span class="magazine-tag">Héritage</span>
+                                <h3>Savoir-Faire Algérien</h3>
+                                <p>Héritage, précision et passion de la matière.</p>
+                                <span class="read-more">Lire l'article →</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="magazine-header reveal-fade" style="padding-top: 80px;">
+            <h1>Le Magazine</h1>
+            <p>Plongez dans l'univers de NHM Studio. Découvrez nos inspirations, notre savoir-faire local, et l'art de concevoir des pièces uniques.</p>
+        </div>
+
+        <section class="magazine-article" id="luxe-artisanal">
+            <div class="mag-text-content reveal-fade">
+                <span class="mag-category">Luxe Artisanal</span>
+                <h2 class="mag-title">L'Élégance Redéfinie</h2>
+                <p class="mag-desc">Le luxe artisanal réside dans l'attention portée aux moindres détails. Nos créations transcendent le temps, mariant un design contemporain audacieux avec des techniques de fabrication ancestrales pour donner vie à des pièces d'exception qui racontent une histoire.</p>
+            </div>
+            <div class="mag-image-content reveal-fade">
+                <img src="photo du studio/IMG_6451.webp" alt="Luxe Artisanal">
+            </div>
+        </section>
+
+        <section class="magazine-article reverse" id="pieces-uniques">
+            <div class="mag-text-content reveal-fade">
+                <span class="mag-category">Pièces Uniques</span>
+                <h2 class="mag-title">L'Art de l'Exclusivité</h2>
+                <p class="mag-desc">Chaque pièce que nous concevons est une œuvre d'art singulière. Pensées sur-mesure pour s'intégrer parfaitement à votre intérieur, nos réalisations reflètent l'individualité de votre espace et célèbrent le caractère irremplaçable du fait-main.</p>
+            </div>
+            <div class="mag-image-content reveal-fade">
+                <img src="photo du studio/IMG_5987.webp" alt="Pièces Uniques">
+            </div>
+        </section>
+
+        <section class="magazine-article">
+            <div class="mag-text-content reveal-fade">
+                <span class="mag-category">Fabriqué en Algérie</span>
+                <h2 class="mag-title">L'Authenticité Locale</h2>
+                <p class="mag-desc">Fièrement fabriquées en Algérie, toutes nos créations mettent en lumière le talent exceptionnel et la minutie de nos artisans locaux. Nous nous engageons à soutenir l'économie locale tout en valorisant notre riche patrimoine culturel et esthétique.</p>
+            </div>
+            <div class="mag-image-content reveal-fade">
+                <img src="photo du studio/IMG_6452.webp" alt="Fabriqué en Algérie">
+            </div>
+        </section>
+
+        <section class="magazine-article reverse" id="savoir-faire">
+            <div class="mag-text-content reveal-fade">
+                <span class="mag-category">Savoir-Faire Algérien</span>
+                <h2 class="mag-title">Héritage & Précision</h2>
+                <p class="mag-desc">Un savoir-faire transmis de génération en génération. La précision du geste, la sélection rigoureuse des matériaux nobles, et la passion de la matière mettent l'excellence du design à la portée de vos espaces de vie.</p>
+            </div>
+            <div class="mag-image-content reveal-fade">
+                <img src="photo du studio/IMG_6450.webp" alt="Savoir-Faire Algérien">
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" id="contact" style="border-top: 1px solid var(--border-color);">
+        <div class="footer-top reveal-fade">
+            <div class="footer-col">
+                <h4>Ooo friends...</h4>
+                <a href="#" class="footer-link barrel-link" data-text="Instagram"><span>Instagram</span></a>
+                <a href="#" class="footer-link barrel-link" data-text="TikTok"><span>TikTok</span></a>
+                <a href="#" class="footer-link barrel-link" data-text="Facebook"><span>Facebook</span></a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <a href="tel:+213560189210" class="footer-link barrel-link" data-text="+213 560 18 92 10"><span>+213 560 18 92 10</span></a>
+                <a href="tel:0552507856" class="footer-link barrel-link" data-text="0552 50 78 56"><span>0552 50 78 56</span></a>
+                <a href="#" class="footer-link barrel-link" data-text="Dar Diaf, Chéraga"><span>Dar Diaf, Chéraga</span></a>
+            </div>
+            <div class="footer-col">
+                 <h4>Legal</h4>
+                <a href="#" class="footer-link barrel-link" data-text="Terms of Service"><span>Terms of Service</span></a>
+                <a href="#" class="footer-link barrel-link" data-text="Privacy Policy"><span>Privacy Policy</span></a>
+            </div>
+        </div>
+        
+        <div class="giant-email-container reveal-fade">
+            <div class="marquee-content">
+                <a href="mailto:hello@nhmstudio.com" class="giant-email">HELLO@NHMSTUDIO.COM — </a>
+                <a href="mailto:hello@nhmstudio.com" class="giant-email">HELLO@NHMSTUDIO.COM — </a>
+                <a href="mailto:hello@nhmstudio.com" class="giant-email">HELLO@NHMSTUDIO.COM — </a>
+                <a href="mailto:hello@nhmstudio.com" class="giant-email">HELLO@NHMSTUDIO.COM — </a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+             <p>&copy; 2026 NHM Studio. All rights reserved.</p>
+             <p>Website by NHM</p>
+        </div>
+    </footer>
+
+    <script src="./main.js?v=5"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            setTimeout(() => {
+                ScrollTrigger.refresh();
+                if (window.lenis) window.lenis.resize();
+            }, 200);
+
+            gsap.to('.reveal-fade', { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 });
+        });
+    </script>
+</body>
+</html>

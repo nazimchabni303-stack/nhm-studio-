@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NHM Studio | À Propos</title>
+    <meta name="description" content="Découvrez NHM Studio, cabinet d'architecture d'intérieur et de conception de mobilier sur mesure basé à Alger.">
+    <link rel="stylesheet" href="./style.css?v=6">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/ScrollTrigger.min.js"></script>
+    
+    <!-- Lenis for Smooth Scroll -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+
+    <style>
+        .about-page-header {
+            padding: 150px 40px 100px;
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-page-header h1 {
+            font-family: var(--font-heading);
+            font-size: 8vw;
+            line-height: 1;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .about-intro-text {
+            font-size: 24px;
+            color: var(--text-dim);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .about-content-section {
+            padding: 60px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .about-text-content h2 {
+            font-family: var(--font-heading);
+            font-size: 42px;
+            color: var(--accent-red);
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .about-text-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text-dim);
+            margin-bottom: 20px;
+        }
+
+        .studio-gallery {
+            padding: 100px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .studio-gallery-title {
+            grid-column: 1 / -1;
+            font-family: var(--font-heading);
+            font-size: 42px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .studio-img-wrapper {
+            overflow: hidden;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .studio-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s var(--transition);
+        }
+
+        .studio-img-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        .img-main { grid-column: 1 / 9; height: 600px; }
+        .img-side { grid-column: 9 / 13; height: 600px; }
+        .img-bottom-1 { grid-column: 1 / 7; height: 400px; }
+        .img-bottom-2 { grid-column: 7 / 13; height: 400px; }
+
+        .about-expertise-section {
+            padding: 100px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .expertise-card {
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: transform 0.4s ease;
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .expertise-card h3 {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--accent-red);
+        }
+
+        .expertise-card p {
+            color: var(--text-dim);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .process-section {
+            padding: 100px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        .process-step {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .step-number {
+            font-family: var(--font-heading);
+            font-size: 60px;
+            color: var(--accent-red);
+            line-height: 1;
+            opacity: 0.5;
+        }
+
+        .step-content h3 {
+            font-family: var(--font-heading);
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .step-content p {
+            color: var(--text-dim);
+            line-height: 1.7;
+            font-size: 16px;
+            max-width: 800px;
+        }
+
+        @media (max-width: 900px) {
+            .expertise-grid {
+                grid-template-columns: 1fr;
+            }
+            .process-step {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .about-content-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .studio-gallery > div {
+                grid-column: 1 / -1 !important;
+                height: 300px !important;
+            }
+            .about-page-header h1 {
+                font-size: 48px;
+            }
+        }
+    </style>
+</head>
+<body class="about-page">
+    <!-- Preloader -->
+    <div class="preloader">
+        <img src="nhm_studio_transparent.png" alt="NHM Studio Logo" class="preloader-logo">
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo-link">
+                <img src="nhm_studio_transparent.png" alt="NHM Studio" class="logo">
+            </a>
+            <nav class="nav">
+                <a href="realisations.html" class="nav-item barrel-link" data-text="Réalisations"><span>Réalisations</span></a>
+                <a href="about.html" class="nav-item barrel-link" data-text="Notre Histoire"><span>Notre Histoire</span></a>
+                <a href="magazine.html" class="nav-item barrel-link" data-text="Magazine"><span>Magazine</span></a>
+                <a href="inspo.html" class="nav-item barrel-link" data-text="Inspo"><span>Inspo</span></a>
+                <a href="index.html#contact" class="nav-item barrel-link" data-text="Contact"><span>Contact</span></a>
+                <a href="atelier-showroom.html" class="nav-item barrel-link nav-atelier" data-text="L'Atelier"><span>L'Atelier</span></a>
+            </nav>
+        <button class="mobile-menu-btn">Menu</button>
+            <div class="header-time">
+                <span id="time">--:-- --</span> <span class="location">Alger, DZ</span>
+            </div>
+        </div>
+    </header>
+
+<!-- Mobile Magazine Menu Overlay -->
+<div class="mobile-menu-overlay">
+    <div class="mobile-menu-header-bar">
+        <span class="menu-title" style="font-family: var(--font-body); font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dim);">Navigation</span>
+        <button class="mobile-menu-close">Fermer ✕</button>
+    </div>
+    <div class="mobile-menu-scroll">
+        <!-- Item 1 -->
+        <a href="index.html" class="mobile-menu-item layout-left">
+            <div class="menu-item-img">
+                <img src="photo du studio/IMG_6451.webp" alt="Accueil">
+            </div>
+            <div class="menu-item-text">
+                <span class="menu-cat">01 / Studio</span>
+                <h2>Accueil</h2>
+            </div>
+        </a>
+        <!-- Item 2 -->
+        <a href="realisations.html" class="mobile-menu-item layout-right">
+            <div class="menu-item-text">
+                <span class="menu-cat">02 / Portfolio</span>
+                <h2>Réalisations</h2>
+            </div>
+            <div class="menu-item-img">
+                <img src="travail et réalisations/Aura nails Paris/Scene 1.webp" alt="Réalisations">
+            </div>
+        </a>
+        <!-- Item 3 -->
+        <a href="atelier-showroom.html" class="mobile-menu-item layout-full">
+            <div class="menu-item-img">
+                <img src="travail et réalisations/bedroom amimar/Image(1).webp" alt="L'Atelier">
+            </div>
+            <div class="menu-item-text">
+                <span class="menu-cat">03 / Design</span>
+                <h2>L'Atelier</h2>
+            </div>
+        </a>
+        <!-- Item 4 -->
+        <a href="about.html" class="mobile-menu-item layout-left">
+            <div class="menu-item-img">
+                <img src="photo du studio/IMG_5987.webp" alt="Notre Histoire">
+            </div>
+            <div class="menu-item-text">
+                <span class="menu-cat">04 / Agence</span>
+                <h2>Notre Histoire</h2>
+            </div>
+        </a>
+        <!-- Item 5 -->
+        <a href="magazine.html" class="mobile-menu-item layout-right">
+            <div class="menu-item-text">
+                <span class="menu-cat">05 / Éditorial</span>
+                <h2>Magazine</h2>
+            </div>
+            <div class="menu-item-img">
+                <img src="photos/project3.jpg" alt="Magazine">
+            </div>
+        </a>
+        <!-- Item 6 -->
+        <a href="inspo.html" class="mobile-menu-item layout-full">
+            <div class="menu-item-img">
+                <img src="INSPO/SnapInsta.to_513742876_17948290989002358_7056905744541463107_n.jpg" alt="Inspo">
+            </div>
+            <div class="menu-item-text">
+                <span class="menu-cat">06 / Moodboard</span>
+                <h2>Inspiration</h2>
+            </div>
+        </a>
+    </div>
+</div>
+
+
+    <main>
+        <section class="about-page-header">
+            <h1 class="magic-text">L'Essence de NHM</h1>
+            <p class="about-intro-text reveal-fade">Créateurs d'espaces singuliers et de mobilier sur mesure. Nous donnons vie à vos idées en alliant esthétique intemporelle et fonctionnalité absolue.</p>
+        </section>
+
+        <section class="about-content-section">
+            <div class="about-text-content reveal-fade">
+                <h2>Notre Philosophie</h2>
+                <p>Basé à Chéraga, à Alger (près de Dar Diaf), NHM Studio développe des espaces et des pièces sur mesure à travers une approche contemporaine, élégante et pensée dans le moindre détail.</p>
+                <p>Entre architecture, design d’intérieur et création de mobilier sur mesure, nous imaginons des lieux durables, raffinés et singuliers. Chaque projet cherche l'équilibre parfait entre fonctionnalité, matière et identité visuelle.</p>
+                <p>Notre processus est global : de la conception 2D/3D rigoureuse à l'accompagnement personnalisé, nous créons des espaces qui reflètent l'identité de nos clients tout en y apposant notre signature esthétique forte.</p>
+                <p>Nous croyons fermement que l'environnement dans lequel nous évoluons influence directement notre bien-être. C'est pourquoi nous accordons une importance primordiale au choix des matériaux, à l'éclairage et à la fluidité des circulations pour créer des ambiances uniques et harmonieuses.</p>
+            </div>
+            <div class="about-visual reveal-fade" style="display: flex; justify-content: center;">
+                <!-- Logo mark or abstract element -->
+                <img src="nhm_studio_transparent.png" alt="NHM Studio" style="filter: brightness(0) invert(1); width: 80%; max-width: 400px; opacity: 0.1;">
+            </div>
+        </section>
+
+        <section class="about-expertise-section">
+            <h2 class="studio-gallery-title reveal-fade" style="text-align: left; margin-bottom: 20px;">Notre Expertise</h2>
+            <div class="expertise-grid">
+                <div class="expertise-card reveal-fade">
+                    <h3>Architecture d'Intérieur</h3>
+                    <p>Nous repensons les volumes, optimisons les espaces et sublimons la lumière naturelle. De la rénovation complète à l'aménagement partiel, nous concevons des intérieurs à la fois esthétiques et hautement fonctionnels pour le secteur résidentiel et commercial.</p>
+                </div>
+                <div class="expertise-card reveal-fade">
+                    <h3>Mobilier Sur Mesure</h3>
+                    <p>Une pièce unique fait toute la différence. Nous dessinons et faisons fabriquer des meubles sur mesure (dressings, cuisines, bibliothèques, assises) parfaitement intégrés à votre espace, alliant des matériaux nobles à un savoir-faire artisanal de qualité.</p>
+                </div>
+                <div class="expertise-card reveal-fade">
+                    <h3>Visualisation 3D</h3>
+                    <p>Pour vous aider à vous projeter avant même le début des travaux, nous réalisons des rendus 3D photoréalistes de très haute qualité. Vous pourrez ainsi visualiser l'atmosphère, les textures et les éclairages de votre futur espace avec précision.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="process-section">
+            <h2 class="studio-gallery-title reveal-fade" style="text-align: left; margin-bottom: 20px;">Notre Processus</h2>
+            <div class="process-steps">
+                <div class="process-step reveal-fade">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Rencontre & Inspiration</h3>
+                        <p>Tout commence par un échange. Nous discutons de vos envies, de vos besoins, de votre mode de vie ou de l'identité de votre marque. Nous établissons ensemble un cahier des charges précis et définissons une direction artistique inspirante (moodboards, palettes de couleurs).</p>
+                    </div>
+                </div>
+                <div class="process-step reveal-fade">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>Conception & Plans</h3>
+                        <p>Notre équipe traduit vos idées en concepts concrets. Nous élaborons les plans d'aménagement 2D, choisissons les matériaux, et créons les modélisations 3D pour vous immerger dans le projet. Chaque détail technique et esthétique est validé avec vous.</p>
+                    </div>
+                </div>
+                <div class="process-step reveal-fade">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Réalisation & Suivi</h3>
+                        <p>Nous coordonnons l'ensemble des artisans et intervenants sur le chantier. Nous assurons un suivi rigoureux pour garantir le respect des délais, du budget et surtout de la qualité d'exécution, jusqu'à la livraison finale de votre nouvel espace.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="studio-gallery">
+            <h2 class="studio-gallery-title reveal-fade">Le Studio</h2>
+            
+            <div class="studio-img-wrapper img-main" data-speed="0.9">
+                <img src="photo du studio/IMG_5985.webp" alt="NHM Studio Interior 1" loading="lazy">
+            </div>
+            <div class="studio-img-wrapper img-side" data-speed="1.15">
+                <img src="photo du studio/IMG_5986.webp" alt="NHM Studio Interior 2" loading="lazy">
+            </div>
+            <div class="studio-img-wrapper img-bottom-1" data-speed="1.05">
+                <img src="photo du studio/IMG_5987.webp" alt="NHM Studio Interior 3" loading="lazy">
+            </div>
+            <div class="studio-img-wrapper img-bottom-2" data-speed="0.85">
+                <img src="photo du studio/IMG_5988.webp" alt="NHM Studio Interior 4" loading="lazy">
+            </div>
+        </section>
+        
+        <footer class="footer" id="contact" style="border-top: 1px solid var(--border-color); padding-top: 60px;">
+            <div class="footer-top reveal-fade">
+                <div class="footer-col">
+                    <h4>Ooo friends...</h4>
+                    <a href="#" class="footer-link barrel-link" data-text="Instagram"><span>Instagram</span></a>
+                    <a href="#" class="footer-link barrel-link" data-text="TikTok"><span>TikTok</span></a>
+                    <a href="#" class="footer-link barrel-link" data-text="Facebook"><span>Facebook</span></a>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <a href="tel:+213560189210" class="footer-link barrel-link" data-text="+213 560 18 92 10"><span>+213 560 18 92 10</span></a>
+                    <a href="tel:0552507856" class="footer-link barrel-link" data-text="0552 50 78 56"><span>0552 50 78 56</span></a>
+                    <a href="#" class="footer-link barrel-link" data-text="Dar Diaf, Chéraga"><span>Dar Diaf, Chéraga</span></a>
+                </div>
+                <div class="footer-col">
+                     <h4>Legal</h4>
+                    <a href="#" class="footer-link barrel-link" data-text="Terms of Service"><span>Terms of Service</span></a>
+                    <a href="#" class="footer-link barrel-link" data-text="Privacy Policy"><span>Privacy Policy</span></a>
+                </div>
+            </div>
+            
+            <div class="giant-email-container reveal-fade">
+                <div class="marquee-content">
+                    <a href="mailto:hello@nhmstudio.com" class="giant-email">HELLO@NHMSTUDIO.COM — </a>
+                    <a href="mailto:hello@nhmstudio.com" class="giant-email">HELLO@NHMSTUDIO.COM — </a>
+                    <a href="mailto:hello@nhmstudio.com" class="giant-email">HELLO@NHMSTUDIO.COM — </a>
+                    <a href="mailto:hello@nhmstudio.com" class="giant-email">HELLO@NHMSTUDIO.COM — </a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                 <p>&copy; 2026 NHM Studio. All rights reserved.</p>
+                 <p>Website by NHM</p>
+            </div>
+        </footer>
+    </main>
+
+    <script src="./main.js?v=6"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            const gallery = document.querySelector('.studio-gallery');
+            if(gallery) {
+                const images = gallery.querySelectorAll('.studio-img-wrapper');
+                
+                // Staggered reveal
+                gsap.fromTo(images, 
+                    { y: 120, opacity: 0, scale: 0.9 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        scale: 1,
+                        duration: 1.6,
+                        stagger: 0.25,
+                        ease: "power4.out",
+                        scrollTrigger: {
+                            trigger: gallery,
+                            start: "top 75%",
+                        }
+                    }
+                );
+
+                // Subtle Parallax effect on scroll
+                images.forEach((img) => {
+                    const speed = img.getAttribute('data-speed') || 1;
+                    gsap.to(img.querySelector('img'), {
+                        yPercent: (1 - speed) * 40,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: img,
+                            start: "top bottom",
+                            end: "bottom top",
+                            scrub: true
+                        }
+                    });
+                });
+            }
+            
+            // Also animate the abstract logo
+            gsap.to(".about-visual img", {
+                rotate: 15,
+                scale: 1.1,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".about-visual",
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 1
+                }
+            });
+        });
+    </script>
+</body>
+</html>

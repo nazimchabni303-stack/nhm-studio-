@@ -6,6 +6,9 @@
     <title>NHM Studio | Inspiration</title>
     <meta name="description" content="Découvrez nos inspirations, références visuelles et notre approche design à travers une galerie interactive.">
     <link rel="stylesheet" href="./style.css?v=4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     
     <!-- GSAP & ScrollTrigger -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
@@ -29,16 +32,90 @@
             <img src="nhm_studio_transparent.png" alt="NHM Studio" class="logo">
         </a>
         <nav class="nav">
-            <a href="index.html#work" class="nav-item barrel-link page-link" data-text="Work"><span>Work</span></a>
-            <a href="index.html#about" class="nav-item barrel-link page-link" data-text="About"><span>About</span></a>
-            <a href="inspo.html" class="nav-item barrel-link page-link" data-text="Inspo"><span>Inspo</span></a>
-            <a href="index.html#contact" class="nav-item barrel-link page-link" data-text="Contact"><span>Contact</span></a>
+            <a href="realisations.html" class="nav-item barrel-link" data-text="Réalisations"><span>Réalisations</span></a>
+            <a href="about.html" class="nav-item barrel-link" data-text="Notre Histoire"><span>Notre Histoire</span></a>
+            <a href="magazine.html" class="nav-item barrel-link" data-text="Magazine"><span>Magazine</span></a>
+            <a href="inspo.html" class="nav-item barrel-link" data-text="Inspo"><span>Inspo</span></a>
+            <a href="index.html#contact" class="nav-item barrel-link" data-text="Contact"><span>Contact</span></a>
+            <a href="atelier-showroom.html" class="nav-item barrel-link nav-atelier" data-text="L'Atelier"><span>L'Atelier</span></a>
         </nav>
+        <button class="mobile-menu-btn">Menu</button>
         <div class="header-time">
             <span id="time">--:-- --</span> <span class="location">Alger, DZ</span>
         </div>
     </div>
 </header>
+
+<!-- Mobile Magazine Menu Overlay -->
+<div class="mobile-menu-overlay">
+    <div class="mobile-menu-header-bar">
+        <span class="menu-title" style="font-family: var(--font-body); font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dim);">Navigation</span>
+        <button class="mobile-menu-close">Fermer ✕</button>
+    </div>
+    <div class="mobile-menu-scroll">
+        <!-- Item 1 -->
+        <a href="index.html" class="mobile-menu-item layout-left">
+            <div class="menu-item-img">
+                <img src="photo du studio/IMG_6451.webp" alt="Accueil">
+            </div>
+            <div class="menu-item-text">
+                <span class="menu-cat">01 / Studio</span>
+                <h2>Accueil</h2>
+            </div>
+        </a>
+        <!-- Item 2 -->
+        <a href="realisations.html" class="mobile-menu-item layout-right">
+            <div class="menu-item-text">
+                <span class="menu-cat">02 / Portfolio</span>
+                <h2>Réalisations</h2>
+            </div>
+            <div class="menu-item-img">
+                <img src="travail et réalisations/Aura nails Paris/Scene 1.webp" alt="Réalisations">
+            </div>
+        </a>
+        <!-- Item 3 -->
+        <a href="atelier-showroom.html" class="mobile-menu-item layout-full">
+            <div class="menu-item-img">
+                <img src="travail et réalisations/bedroom amimar/Image(1).webp" alt="L'Atelier">
+            </div>
+            <div class="menu-item-text">
+                <span class="menu-cat">03 / Design</span>
+                <h2>L'Atelier</h2>
+            </div>
+        </a>
+        <!-- Item 4 -->
+        <a href="about.html" class="mobile-menu-item layout-left">
+            <div class="menu-item-img">
+                <img src="photo du studio/IMG_5987.webp" alt="Notre Histoire">
+            </div>
+            <div class="menu-item-text">
+                <span class="menu-cat">04 / Agence</span>
+                <h2>Notre Histoire</h2>
+            </div>
+        </a>
+        <!-- Item 5 -->
+        <a href="magazine.html" class="mobile-menu-item layout-right">
+            <div class="menu-item-text">
+                <span class="menu-cat">05 / Éditorial</span>
+                <h2>Magazine</h2>
+            </div>
+            <div class="menu-item-img">
+                <img src="photos/project3.jpg" alt="Magazine">
+            </div>
+        </a>
+        <!-- Item 6 -->
+        <a href="inspo.html" class="mobile-menu-item layout-full">
+            <div class="menu-item-img">
+                <img src="INSPO/SnapInsta.to_513742876_17948290989002358_7056905744541463107_n.jpg" alt="Inspo">
+            </div>
+            <div class="menu-item-text">
+                <span class="menu-cat">06 / Moodboard</span>
+                <h2>Inspiration</h2>
+            </div>
+        </a>
+    </div>
+</div>
+
 
 <main>
     <!-- HORIZONTAL GALLERY -->

@@ -5,10 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. SMOOTH SCROLL (LENIS)
     // ==========================================
     const lenis = new Lenis({
-        duration: 2.5,
+        duration: 1.8,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
         smoothWheel: true
     });
+    window.lenis = lenis;
 
     lenis.on('scroll', ScrollTrigger.update);
 
@@ -23,35 +24,40 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     const cursor = document.querySelector('.cursor');
     
-    // Setup GSAP for cursor follow
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
+    // Only enable custom cursor on non-touch devices
+    if (cursor && window.matchMedia("(pointer: fine)").matches) {
+        // Setup GSAP for cursor follow
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
 
-    window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
 
-    // Inertia follow using GSAP ticker
-    gsap.ticker.add(() => {
-        gsap.to(cursor, {
-            x: mouseX,
-            y: mouseY,
-            duration: 0.2, // Small duration for inertia
-            ease: "power2.out"
+        // Inertia follow using GSAP ticker
+        gsap.ticker.add(() => {
+            gsap.to(cursor, {
+                x: mouseX,
+                y: mouseY,
+                duration: 0.2, // Small duration for inertia
+                ease: "power2.out"
+            });
         });
-    });
 
-    // Cursor hover effects
-    const interactives = document.querySelectorAll('a, button, .project-row, .gallery-item, .h-gallery-item');
-    interactives.forEach((el) => {
-        el.addEventListener('mouseenter', () => {
-            gsap.to(cursor, { scale: 3, duration: 0.3, ease: "back.out(1.7)" });
+        // Cursor hover effects
+        const interactives = document.querySelectorAll('a, button, .project-row, .gallery-item, .h-gallery-item');
+        interactives.forEach((el) => {
+            el.addEventListener('mouseenter', () => {
+                gsap.to(cursor, { scale: 3, duration: 0.3, ease: "back.out(1.7)" });
+            });
+            el.addEventListener('mouseleave', () => {
+                gsap.to(cursor, { scale: 1, duration: 0.3, ease: "power2.out" });
+            });
         });
-        el.addEventListener('mouseleave', () => {
-            gsap.to(cursor, { scale: 1, duration: 0.3, ease: "power2.out" });
-        });
-    });
+    } else if (cursor) {
+        cursor.style.display = 'none';
+    }
 
     // ==========================================
     // 3. HORIZONTAL SCROLL
@@ -68,19 +74,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (workSection && projectContainer) {
-        const tween = gsap.to(projectContainer, {
-            x: getScrollAmount,
-            ease: "none"
-        });
+        let mm = gsap.matchMedia();
 
-        ScrollTrigger.create({
-            trigger: workSection,
-            start: "center center",
-            end: () => `+=${getScrollAmount() * -1}`, // Scroll distance equals translation distance
-            pin: true,
-            animation: tween,
-            scrub: 1, // Smooth scrub
-            invalidateOnRefresh: true // Recalculate on resize
+        mm.add("(min-width: 769px)", () => {
+            const tween = gsap.to(projectContainer, {
+                x: getScrollAmount,
+                ease: "none"
+            });
+
+            ScrollTrigger.create({
+                trigger: workSection,
+                start: "center center",
+                end: () => `+=${getScrollAmount() * -1}`, // Scroll distance equals translation distance
+                pin: true,
+                animation: tween,
+                scrub: 2.5, // Slow cinematic scrub
+                invalidateOnRefresh: true // Recalculate on resize
+            });
+
+            // Slow cinematic progressive reveal for horizontal project items
+            const projectRows = gsap.utils.toArray('.work-section .project-row');
+            projectRows.forEach((row) => {
+                gsap.from(row, {
+                    opacity: 0.2,
+                    scale: 0.9,
+                    y: 30,
+                    scrollTrigger: {
+                        trigger: row,
+                        start: "left 95%",
+                        end: "left 50%",
+                        containerAnimation: tween,
+                        scrub: 1
+                    }
+                });
+            });
         });
     }
 
@@ -111,29 +138,40 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.set(scrollElements, { opacity: 0, y: 80 });
 
     // Preloader timeline (fade in logo, then fade out screen)
-    // We want the preloader to show on load
-    gsap.set(".preloader", { pointerEvents: "all" });
+    const preloaderEl = document.querySelector('.preloader');
     
-    gsap.timeline()
-    .to(".preloader-logo", {
-        opacity: 1,
-        duration: 1.0,
-        ease: "power2.inOut"
-    })
-    .to(".preloader-logo", {
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.inOut",
-        delay: 0.3
-    })
-    .to(".preloader", {
-        yPercent: -100,
-        duration: 1.2,
-        ease: "expo.inOut",
-        onComplete: () => {
-            gsap.set(".preloader", { pointerEvents: "none", yPercent: 0, opacity: 0 }); // reset for transitions
+    function hidePreloader() {
+        if (preloaderEl) {
+            preloaderEl.classList.add('is-hidden');
+            gsap.set(preloaderEl, { pointerEvents: "none", display: "none", opacity: 0 });
         }
-    }, "-=0.2");
+        if (window.lenis) window.lenis.resize();
+        ScrollTrigger.refresh();
+    }
+
+    if (preloaderEl) {
+        gsap.timeline()
+        .to(".preloader-logo", {
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.inOut"
+        })
+        .to(".preloader-logo", {
+            opacity: 0,
+            duration: 0.4,
+            ease: "power2.inOut",
+            delay: 0.2
+        })
+        .to(".preloader", {
+            yPercent: -100,
+            duration: 0.8,
+            ease: "expo.inOut",
+            onComplete: hidePreloader
+        }, "-=0.1");
+
+        // Safety fallback: guaranteed hide after 1.8 seconds max
+        setTimeout(hidePreloader, 1800);
+    }
 
     // ==========================================
     // PAGE TRANSITIONS
@@ -152,32 +190,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else if (targetPath) {
                     const normalizedTarget = targetPath.replace(/^\//, '').replace('index.html', '');
                     const normalizedCurrent = currentPath.replace(/^\//, '').replace('index.html', '');
-                    if (normalizedTarget === normalizedCurrent) {
+                    // For local file testing or dev server, if they are exactly the same, it's the same page
+                    if (normalizedTarget === normalizedCurrent && normalizedTarget !== 'about.html' && normalizedTarget !== 'realisations.html' && normalizedTarget !== 'inspo.html') {
                         isSamePage = true;
                     }
                 }
 
                 if (!isSamePage) {
-                    e.preventDefault();
-                    
-                    // Show preloader
-                    gsap.set(".preloader", { opacity: 1, yPercent: 0, pointerEvents: "all", backgroundColor: "var(--bg-dark)" });
-                    gsap.timeline()
-                    .fromTo(".preloader", 
-                        { yPercent: 100 }, 
-                        { yPercent: 0, duration: 1.0, ease: "expo.inOut" }
-                    )
-                    .to(".preloader-logo", {
-                        opacity: 1,
-                        duration: 0.6,
-                        ease: "power2.inOut",
-                        onComplete: () => {
-                            window.location.href = targetUrl;
-                        }
-                    });
-                } else {
-                    // It's an anchor link on the same page, do nothing to allow native scroll/jump
-                    // BUT if we use Lenis, we can also smooth scroll it, but native is fine.
+                    // Fast native navigation for smooth reliable page loads
                 }
             }
         });
@@ -354,6 +374,78 @@ document.addEventListener('DOMContentLoaded', () => {
                     containerAnimation: hTween,
                     scrub: 1 // Ties the animation exactly to the scroll position
                 }
+            });
+        });
+    }
+
+    // ==========================================
+    // 8. ZOOM PARALLAX MAGAZINE
+    // ==========================================
+    const zoomContainer = document.querySelector('.zoom-parallax-container');
+    if (zoomContainer) {
+        const scales = [4, 5, 6, 5, 6, 8, 9];
+        const layers = document.querySelectorAll('.zoom-image-layer');
+        const articlesOverlay = document.querySelector('.zoom-articles-overlay');
+
+        const zoomTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: zoomContainer,
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1,
+                pin: ".zoom-parallax-sticky",
+                onUpdate: (self) => {
+                    // Reveal articles when scroll reaches 55% of the parallax container
+                    if (self.progress > 0.55) {
+                        articlesOverlay?.classList.add('is-visible');
+                    } else {
+                        articlesOverlay?.classList.remove('is-visible');
+                    }
+                }
+            }
+        });
+
+        layers.forEach((layer, i) => {
+            const targetScale = scales[i % scales.length];
+            zoomTl.to(layer, {
+                scale: targetScale,
+                ease: "none"
+            }, 0);
+        });
+    }
+
+
+    // ==========================================
+    // MOBILE MAGAZINE MENU
+    // ==========================================
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const menuClose = document.querySelector('.mobile-menu-close');
+    const menuOverlay = document.querySelector('.mobile-menu-overlay');
+
+    if (menuBtn && menuClose && menuOverlay) {
+        // CRITICAL: Stop Lenis from intercepting touch/wheel events inside the overlay
+        ['wheel', 'touchstart', 'touchmove', 'touchend'].forEach(evt => {
+            menuOverlay.addEventListener(evt, (e) => {
+                e.stopPropagation();
+            }, { passive: true });
+        });
+
+        menuBtn.addEventListener('click', () => {
+            menuOverlay.classList.add('is-active');
+            menuOverlay.scrollTop = 0;
+            if (window.lenis) window.lenis.stop();
+        });
+
+        menuClose.addEventListener('click', () => {
+            menuOverlay.classList.remove('is-active');
+            if (window.lenis) window.lenis.start();
+        });
+
+        // Also close when clicking a menu link
+        menuOverlay.querySelectorAll('.mobile-menu-item').forEach(link => {
+            link.addEventListener('click', () => {
+                menuOverlay.classList.remove('is-active');
+                if (window.lenis) window.lenis.start();
             });
         });
     }

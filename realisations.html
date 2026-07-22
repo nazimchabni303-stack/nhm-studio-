@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NHM Studio | Réalisations</title>
+    <meta name="description" content="Découvrez nos travaux et réalisations en architecture, design d'intérieur et mobilier sur mesure.">
+    <link rel="stylesheet" href="./style.css?v=5">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/ScrollTrigger.min.js"></script>
+    
+    <!-- Lenis for Smooth Scroll -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+
+    <style>
+        .portfolio-header {
+            padding: 150px 40px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .portfolio-header h1 {
+            font-family: var(--font-heading);
+            font-size: 6vw;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            font-weight: 400;
+        }
+        
+        .portfolio-header p {
+            font-size: 18px;
+            color: var(--text-dim);
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .project-section {
+            padding: 80px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .project-title-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 40px;
+        }
+
+        .project-title-area h2 {
+            font-family: var(--font-heading);
+            font-size: 42px;
+            font-weight: 400;
+            color: var(--accent-red);
+        }
+
+        .project-tags {
+            font-size: 14px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+        }
+
+        .project-img-wrapper {
+            overflow: hidden;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .project-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s var(--transition);
+        }
+
+        .project-img-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Asymmetric Layouts for variety */
+        .layout-a .img-1 { grid-column: 1 / 9; height: 600px; }
+        .layout-a .img-2 { grid-column: 9 / 13; height: 600px; }
+        .layout-a .img-3 { grid-column: 1 / 7; height: 400px; }
+        .layout-a .img-4 { grid-column: 7 / 13; height: 400px; }
+
+        .layout-b .img-1 { grid-column: 1 / 13; height: 700px; }
+        .layout-b .img-2 { grid-column: 1 / 5; height: 400px; }
+        .layout-b .img-3 { grid-column: 5 / 9; height: 400px; }
+        .layout-b .img-4 { grid-column: 9 / 13; height: 400px; }
+
+        .layout-c .img-1 { grid-column: 1 / 7; height: 500px; }
+        .layout-c .img-2 { grid-column: 7 / 13; height: 500px; }
+        .layout-c .img-3 { grid-column: 3 / 11; height: 600px; margin-top: 40px; }
+
+        .project-description {
+            max-width: 500px;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-dim);
+            text-align: right;
+        }
+
+        @media (max-width: 768px) {
+            .project-gallery > div {
+                grid-column: 1 / -1 !important;
+                height: 300px !important;
+                margin-top: 0 !important;
+            }
+            .project-description {
+                text-align: left;
+                margin-top: 15px;
+                max-width: 100%;
+            }
+            .project-title-area {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            .portfolio-header h1 {
+                font-size: 42px;
+            }
+        }
+    </style>
+</head>
+<body class="portfolio-page">
+    <!-- Preloader -->
+    <div class="preloader">
+        <img src="nhm_studio_transparent.png" alt="NHM Studio Logo" class="preloader-logo">
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo-link">
+                <img src="nhm_studio_transparent.png" alt="NHM Studio" class="logo">
+            </a>
+            <nav class="nav">
+                <a href="realisations.html" class="nav-item barrel-link" data-text="Réalisations"><span>Réalisations</span></a>
+                <a href="about.html" class="nav-item barrel-link" data-text="Notre Histoire"><span>Notre Histoire</span></a>
+                <a href="magazine.html" class="nav-item barrel-link" data-text="Magazine"><span>Magazine</span></a>
+                <a href="inspo.html" class="nav-item barrel-link" data-text="Inspo"><span>Inspo</span></a>
+                <a href="index.html#contact" class="nav-item barrel-link" data-text="Contact"><span>Contact</span></a>
+                <a href="atelier-showroom.html" class="nav-item barrel-link nav-atelier" data-text="L'Atelier"><span>L'Atelier</span></a>
+            </nav>
+        <button class="mobile-menu-btn">Menu</button>
+            <div class="header-time">
+                <span id="time">--:-- --</span> <span class="location">Alger, DZ</span>
+            </div>
+        </div>
+    </header>
+
+<!-- Mobile Magazine Menu Overlay -->
+<div class="mobile-menu-overlay">
+    <div class="mobile-menu-header-bar">
+        <span class="menu-title" style="font-family: var(--font-body); font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dim);">Navigation</span>
+        <button class="mobile-menu-close">Fermer ✕</button>
+    </div>
+    <div class="mobile-menu-scroll">
+        <!-- Item 1 -->
+        <a href="index.html" class="mobile-menu-item layout-left">
+            <div class="menu-item-img">
+                <img src="photo du studio/IMG_6451.webp" alt="Accueil">
+            </div>
+            <div class="menu-item-text">
+                <span class="menu-cat">01 / Studio</span>
+                <h2>Accueil</h2>
+            </div>
+        </a>
+        <!-- Item 2 -->
+        <a href="realisations.html" class="mobile-menu-item layout-right">
+            <div class="menu-item-text">
+                <span class="menu-cat">02 / Portfolio</span>
+                <h2>Réalisations</h2>
+            </div>
+            <div class="menu-item-img">
+                <img src="travail et réalisations/Aura nails Paris/Scene 1.webp" alt="Réalisations">
+            </div>
+        </a>
+        <!-- Item 3 -->
+        <a href="atelier-showroom.html" class="mobile-menu-item layout-full">
+            <div class="menu-item-img">
+                <img src="travail et réalisations/bedroom amimar/Image(1).webp" alt="L'Atelier">
+            </div>
+            <div class="menu-item-text">
+                <span class="menu-cat">03 / Design</span>
+                <h2>L'Atelier</h2>
+            </div>
+        </a>
+        <!-- Item 4 -->
+        <a href="about.html" class="mobile-menu-item layout-left">
+            <div class="menu-item-img">
+                <img src="photo du studio/IMG_5987.webp" alt="Notre Histoire">
+            </div>
+            <div class="menu-item-text">
+                <span class="menu-cat">04 / Agence</span>
+                <h2>Notre Histoire</h2>
+            </div>
+        </a>
+        <!-- Item 5 -->
+        <a href="magazine.html" class="mobile-menu-item layout-right">
+            <div class="menu-item-text">
+                <span class="menu-cat">05 / Éditorial</span>
+                <h2>Magazine</h2>
+            </div>
+            <div class="menu-item-img">
+                <img src="photos/project3.jpg" alt="Magazine">
+            </div>
+        </a>
+        <!-- Item 6 -->
+        <a href="inspo.html" class="mobile-menu-item layout-full">
+            <div class="menu-item-img">
+                <img src="INSPO/SnapInsta.to_513742876_17948290989002358_7056905744541463107_n.jpg" alt="Inspo">
+            </div>
+            <div class="menu-item-text">
+                <span class="menu-cat">06 / Moodboard</span>
+                <h2>Inspiration</h2>
+            </div>
+        </a>
+    </div>
+</div>
+
+
+    <main>
+        <section class="portfolio-header">
+            <h1 class="magic-text">Travaux &<br>Réalisations</h1>
+            <p class="reveal-fade" style="font-size: 20px; color: var(--text-dim); margin-top: 20px;">Découvrez une sélection de nos projets récents. De la conception architecturale à l'aménagement intérieur et au mobilier sur mesure, chaque espace est pensé avec précision et élégance.</p>
+        </section>
+
+        <!-- Interactive Category HoverSlider Section -->
+        <section class="category-slider-section reveal-fade">
+            <div class="hover-slider-container">
+                <div class="hover-slider-menu">
+                    <div class="hover-slider-item is-active" data-index="0" data-category="all" data-text="Tous les Projets">Tous les Projets</div>
+                    <div class="hover-slider-item" data-index="1" data-category="chambre" data-text="Chambre & Suite">Chambre & Suite</div>
+                    <div class="hover-slider-item" data-index="2" data-category="salon" data-text="Salon & Séjour">Salon & Séjour</div>
+                    <div class="hover-slider-item" data-index="3" data-category="commercial" data-text="Commercial & Restauration">Commercial & Restauration</div>
+                    <div class="hover-slider-item" data-index="4" data-category="wellness" data-text="Bien-Être & Sport">Bien-Être & Sport</div>
+                </div>
+                <div class="hover-slider-image-wrap">
+                    <img src="travail et réalisations/Aura nails Paris/Scene 1.webp" class="hover-slider-img is-active" data-index="0" alt="Tous les projets">
+                    <img src="travail et réalisations/bedroom amimar/Image(1).webp" class="hover-slider-img" data-index="1" alt="Chambre & Suite">
+                    <img src="travail et réalisations/villa larbaatache/Scene 1.webp" class="hover-slider-img" data-index="2" alt="Salon & Séjour">
+                    <img src="travail et réalisations/Boullion paris/Scène 2.webp" class="hover-slider-img" data-index="3" alt="Commercial & Restauration">
+                    <img src="travail et réalisations/Wellness club/Image 1.webp" class="hover-slider-img" data-index="4" alt="Bien-Être & Sport">
+                </div>
+            </div>
+        </section>
+
+        <!-- Project 1: Aura Nails -->
+        <section class="project-section" id="aura" data-category="commercial">
+            <div class="project-title-area reveal-fade">
+                <div class="project-info-left">
+                    <h2>Aura Nails Paris</h2>
+                    <div class="project-tags">Architecture Intérieure / Aménagement</div>
+                </div>
+                <div class="project-description">
+                    Situé au cœur de Paris, ce bar à ongles a été conçu comme un véritable sanctuaire de douceur. Les formes organiques, les arches élégantes et les tons poudrés créent une atmosphère apaisante et luxueuse, offrant aux clientes une parenthèse de détente absolue au milieu de l'effervescence parisienne.
+                </div>
+            </div>
+            <div class="project-gallery layout-a">
+                <div class="project-img-wrapper img-1" data-speed="0.9">
+                    <img src="travail et réalisations/Aura nails Paris/Scene 1.webp" alt="Aura Nails 1" loading="lazy">
+                </div>
+                <div class="project-img-wrapper img-2" data-speed="1.1">
+                    <img src="travail et réalisations/Aura nails Paris/Scene 3.webp" alt="Aura Nails 2" loading="lazy">
+                </div>
+                <div class="project-img-wrapper img-3" data-speed="1.05">
+                    <img src="travail et réalisations/Aura nails Paris/Scene 7.webp" alt="Aura Nails 3" loading="lazy">
+                </div>
+                <div class="project-img-wrapper img-4" data-speed="0.95">
+                    <img src="travail et réalisations/Aura nails Paris/Scene 4.webp" alt="Aura Nails 4" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <!-- Project 2: Bouillon Paris -->
+        <section class="project-section" id="bouillon" data-category="commercial">
+            <div class="project-title-area reveal-fade">
+                <div class="project-info-left">
+                    <h2>Bouillon Paris</h2>
+                    <div class="project-tags">Design Commercial / Visualisation 3D</div>
+                </div>
+                <div class="project-description">
+                    Une réinterprétation contemporaine de la brasserie classique parisienne. L'objectif était de conserver l'authenticité et la convivialité du lieu tout en y insufflant une modernité raffinée à travers un travail pointu sur l'éclairage, les textures et le mobilier. Les rendus 3D illustrent l'équilibre parfait entre tradition et design actuel.
+                </div>
+            </div>
+            <div class="project-gallery layout-b">
+                <div class="project-img-wrapper img-1" data-speed="0.85">
+                    <img src="travail et réalisations/Boullion paris/Scène 2.webp" alt="Bouillon 1" loading="lazy">
+                </div>
+                <div class="project-img-wrapper img-2" data-speed="1.15">
+                    <img src="travail et réalisations/Boullion paris/Scène 3.webp" alt="Bouillon 2" loading="lazy">
+                </div>
+                <div class="project-img-wrapper img-3" data-speed="1.05">
+                    <img src="travail et réalisations/Boullion paris/Scène 5.webp" alt="Bouillon 3" loading="lazy">
+                </div>
+                <div class="project-img-wrapper img-4" data-speed="0.95">
+                    <img src="travail et réalisations/Boullion paris/Scène 8.webp" alt="Bouillon 4" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <!-- Project 3: Wellness Club -->
+        <section class="project-section" id="wellness" data-category="wellness">
+            <div class="project-title-area reveal-fade">
+                <div class="project-info-left">
+                    <h2>Wellness Club</h2>
+                    <div class="project-tags">Architecture Sport & Bien-être</div>
+                </div>
+                <div class="project-description">
+                    Un espace dédié au sport et au bien-être pensé pour stimuler l'énergie tout en favorisant la relaxation. L'utilisation de matériaux bruts contrastés par des éclairages chauds et des lignes épurées confère au club une dimension premium. L'aménagement optimise la circulation entre les différentes zones d'entraînement et de repos.
+                </div>
+            </div>
+            <div class="project-gallery layout-c">
+                <div class="project-img-wrapper img-1" data-speed="0.9">
+                    <img src="travail et réalisations/Wellness club/Image 1.webp" alt="Wellness 1" loading="lazy">
+                </div>
+                <div class="project-img-wrapper img-2" data-speed="1.1">
+                    <img src="travail et réalisations/Wellness club/Image 2.webp" alt="Wellness 2" loading="lazy">
+                </div>
+                <div class="project-img-wrapper img-3" data-speed="1.0">
+                    <img src="travail et réalisations/Wellness club/Image 20_19_11.webp" alt="Wellness 3" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <!-- Project 4: Bedroom Amimar -->
+        <section class="project-section" id="bedroom" data-category="chambre">
+            <div class="project-title-area reveal-fade">
+                <div class="project-info-left">
+                    <h2>Bedroom Amimar</h2>
+                    <div class="project-tags">Design Résidentiel / Chambre</div>
+                </div>
+                <div class="project-description">
+                    La conception d'une chambre parentale intimiste et sophistiquée. Le bois sombre s'associe à des textiles moelleux et à une palette de couleurs profondes pour créer une ambiance chaleureuse et feutrée. Chaque élément de mobilier a été pensé sur mesure pour maximiser le rangement sans alourdir l'esthétique minimaliste de la pièce.
+                </div>
+            </div>
+            <div class="project-gallery layout-a">
+                <div class="project-img-wrapper img-1" data-speed="0.95">
+                    <img src="travail et réalisations/bedroom amimar/Image(1).webp" alt="Bedroom 1" loading="lazy">
+                </div>
+                <div class="project-img-wrapper img-2" data-speed="1.05">
+                    <img src="travail et réalisations/bedroom amimar/Image(2).webp" alt="Bedroom 2" loading="lazy">
+                </div>
+                <div class="project-img-wrapper img-3" data-speed="1.1">
+                    <img src="travail et réalisations/bedroom amimar/Scene 6.webp" alt="Bedroom 3" loading="lazy">
+                </div>
+                <div class="project-img-wrapper img-4" data-speed="0.85">
+                    <img src="travail et réalisations/bedroom amimar/Scene 7.webp" alt="Bedroom 4" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <!-- Project 5: Villa Larbaatache -->
+        <section class="project-section" id="villa" data-category="salon">
+            <div class="project-title-area reveal-fade">
+                <div class="project-info-left">
+                    <h2>Villa Larbaatache</h2>
+                    <div class="project-tags">Architecture & Conception / Salon & Séjour</div>
+                </div>
+                <div class="project-description">
+                    Un projet résidentiel d'envergure où les grands volumes rencontrent la lumière naturelle. La conception architecturale de cette villa met en valeur des espaces de vie ouverts, favorisant la fluidité entre l'intérieur et l'extérieur. Les choix de matériaux luxueux et durables ancrent la maison dans une élégance intemporelle.
+                </div>
+            </div>
+            <div class="project-gallery layout-b" style="margin-bottom: 100px;">
+                <div class="project-img-wrapper img-1" data-speed="0.9">
+                    <img src="travail et réalisations/villa larbaatache/Scene 1.webp" alt="Villa 1" loading="lazy">
+                </div>
+                <div class="project-img-wrapper img-2" data-speed="1.15">
+                    <img src="travail et réalisations/villa larbaatache/Scene 2.webp" alt="Villa 2" loading="lazy">
+                </div>
+                <div class="project-img-wrapper img-3" data-speed="1.05">
+                    <img src="travail et réalisations/villa larbaatache/Scene 3.webp" alt="Villa 3" loading="lazy">
+                </div>
+                <div class="project-img-wrapper img-4" data-speed="0.95">
+                    <img src="travail et réalisations/villa larbaatache/Scene 4.webp" alt="Villa 4" loading="lazy">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="./main.js?v=5"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            setTimeout(() => {
+                ScrollTrigger.refresh();
+                if (window.lenis) window.lenis.resize();
+            }, 300);
+
+            // Init HoverSlider Category Selector
+            const categoryItems = document.querySelectorAll('.hover-slider-item');
+            const sliderImages = document.querySelectorAll('.hover-slider-img');
+            const projectSections = document.querySelectorAll('.project-section');
+
+            categoryItems.forEach((item) => {
+                const text = item.getAttribute('data-text') || item.textContent;
+                item.innerHTML = '';
+                
+                text.split('').forEach((char, i) => {
+                    const wrap = document.createElement('span');
+                    wrap.className = 'stagger-char-wrap';
+                    
+                    const dimSpan = document.createElement('span');
+                    dimSpan.className = 'stagger-char-dim';
+                    dimSpan.style.transitionDelay = `${i * 0.02}s`;
+                    dimSpan.innerHTML = char === ' ' ? '&nbsp;' : char;
+
+                    const actSpan = document.createElement('span');
+                    actSpan.className = 'stagger-char-active';
+                    actSpan.style.transitionDelay = `${i * 0.02}s`;
+                    actSpan.innerHTML = char === ' ' ? '&nbsp;' : char;
+
+                    wrap.appendChild(dimSpan);
+                    wrap.appendChild(actSpan);
+                    item.appendChild(wrap);
+                });
+
+                function activateIndex(idx, category) {
+                    categoryItems.forEach(el => el.classList.remove('is-active'));
+                    sliderImages.forEach(img => img.classList.remove('is-active'));
+
+                    item.classList.add('is-active');
+                    const targetImg = document.querySelector(`.hover-slider-img[data-index="${idx}"]`);
+                    if (targetImg) targetImg.classList.add('is-active');
+
+                    // Filter Projects
+                    projectSections.forEach(sec => {
+                        const secCat = sec.getAttribute('data-category');
+                        if (category === 'all' || secCat === category) {
+                            gsap.to(sec, { display: 'block', opacity: 1, duration: 0.4 });
+                        } else {
+                            gsap.to(sec, { display: 'none', opacity: 0, duration: 0.3 });
+                        }
+                    });
+                    setTimeout(() => {
+                        ScrollTrigger.refresh();
+                        if (window.lenis) window.lenis.resize();
+                    }, 450);
+                }
+
+                item.addEventListener('mouseenter', () => {
+                    const idx = item.getAttribute('data-index');
+                    const cat = item.getAttribute('data-category');
+                    activateIndex(idx, cat);
+                });
+
+                item.addEventListener('click', () => {
+                    const idx = item.getAttribute('data-index');
+                    const cat = item.getAttribute('data-category');
+                    activateIndex(idx, cat);
+                });
+            });
+
+            // Creative Image Reveal and Parallax
+            const galleries = document.querySelectorAll('.project-gallery');
+            galleries.forEach((gallery) => {
+                const images = gallery.querySelectorAll('.project-img-wrapper');
+                gsap.fromTo(images, 
+                    { y: 100, opacity: 0, scale: 0.95 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        scale: 1,
+                        duration: 1.5,
+                        stagger: 0.2,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: gallery,
+                            start: "top 80%",
+                        }
+                    }
+                );
+
+                images.forEach((img) => {
+                    const speed = img.getAttribute('data-speed') || 1;
+                    gsap.to(img.querySelector('img'), {
+                        yPercent: (1 - speed) * 30,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: img,
+                            start: "top bottom",
+                            end: "bottom top",
+                            scrub: true
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
