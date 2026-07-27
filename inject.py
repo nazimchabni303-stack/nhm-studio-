@@ -27,13 +27,13 @@ overlay_html = """
                 <h2>Réalisations</h2>
             </div>
             <div class="menu-item-img">
-                <img src="travail et réalisations/Aura nails Paris/Scene 1.webp" alt="Réalisations">
+                <img src="Real new nhm/01 WELLNES/Image 20_33_09.png" alt="Réalisations">
             </div>
         </a>
         <!-- Item 3 -->
         <a href="atelier-showroom.html" class="mobile-menu-item layout-full">
             <div class="menu-item-img">
-                <img src="travail et réalisations/bedroom amimar/Image(1).webp" alt="L'Atelier">
+                <img src="Real new nhm/BEDROOM/BEDROOM MASTER .png" alt="L'Atelier">
             </div>
             <div class="menu-item-text">
                 <span class="menu-cat">03 / Design</span>
@@ -63,7 +63,7 @@ overlay_html = """
         <!-- Item 6 -->
         <a href="inspo.html" class="mobile-menu-item layout-full">
             <div class="menu-item-img">
-                <img src="INSPO/SnapInsta.to_513742876_17948290989002358_7056905744541463107_n.jpg" alt="Inspo">
+                <img src="INSPO/neww/IMG_6661.JPG.jpeg" alt="Inspo">
             </div>
             <div class="menu-item-text">
                 <span class="menu-cat">06 / Moodboard</span>

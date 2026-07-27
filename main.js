@@ -150,27 +150,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (preloaderEl) {
+        gsap.set(".preloader-logo", { scale: 0.9, opacity: 0 });
         gsap.timeline()
         .to(".preloader-logo", {
             opacity: 1,
-            duration: 0.6,
-            ease: "power2.inOut"
+            scale: 1,
+            duration: 1.2,
+            ease: "power2.out"
         })
         .to(".preloader-logo", {
             opacity: 0,
-            duration: 0.4,
-            ease: "power2.inOut",
-            delay: 0.2
+            scale: 1.05,
+            duration: 0.6,
+            ease: "power2.in",
+            delay: 1.1
         })
         .to(".preloader", {
             yPercent: -100,
-            duration: 0.8,
+            duration: 1.0,
             ease: "expo.inOut",
             onComplete: hidePreloader
-        }, "-=0.1");
+        }, "-=0.2");
 
-        // Safety fallback: guaranteed hide after 1.8 seconds max
-        setTimeout(hidePreloader, 1800);
+        // Safety fallback: guaranteed hide after 4.5 seconds max
+        setTimeout(hidePreloader, 4500);
     }
 
     // ==========================================
