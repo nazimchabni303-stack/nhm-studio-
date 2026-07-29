@@ -1233,7 +1233,14 @@ function forceTextureChange(zoneId, texId, texName) {
         } else if (texId === "verre") {
             newImg.src = "data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'/>";
         } else {
-            newImg.src = encodeURI(`Photo atelier/final/generations_automatiques/${currentId}/${zoneId}_${texId}.png`);
+            const basePath = `Photo atelier/final/generations_automatiques/${currentId}/${zoneId}_${texId}`;
+            newImg.src = encodeURI(`${basePath}.webp`);
+            newImg.onerror = function() {
+                if (this.src.includes('.webp')) {
+                    this.src = encodeURI(`${basePath}.png`);
+                    this.onerror = null;
+                }
+            };
         }
         newImg.alt = texName;
         stage.appendChild(newImg);
@@ -1272,7 +1279,14 @@ function forceTextureChange(zoneId, texId, texName) {
                         } else if (defTexObj.id === "verre") {
                             otherImg.src = "data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'/>";
                         } else {
-                            otherImg.src = encodeURI(`Photo atelier/final/generations_automatiques/${currentId}/${z.id}_${defTexObj.id}.png`);
+                            const basePath = `Photo atelier/final/generations_automatiques/${currentId}/${z.id}_${defTexObj.id}`;
+                            otherImg.src = encodeURI(`${basePath}.webp`);
+                            otherImg.onerror = function() {
+                                if (this.src.includes('.webp')) {
+                                    this.src = encodeURI(`${basePath}.png`);
+                                    this.onerror = null;
+                                }
+                            };
                         }
                         otherImg.alt = defTexObj.name;
                         stage.appendChild(otherImg);
@@ -1325,7 +1339,14 @@ function forceTextureChange(zoneId, texId, texName) {
                             } else if (defTexObj.id === "verre") {
                                 otherImg.src = "data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'/>";
                             } else {
-                                otherImg.src = encodeURI(`Photo atelier/final/generations_automatiques/${currentId}/${z.id}_${defTexObj.id}.png`);
+                                const basePath = `Photo atelier/final/generations_automatiques/${currentId}/${z.id}_${defTexObj.id}`;
+                                otherImg.src = encodeURI(`${basePath}.webp`);
+                                otherImg.onerror = function() {
+                                    if (this.src.includes('.webp')) {
+                                        this.src = encodeURI(`${basePath}.png`);
+                                        this.onerror = null;
+                                    }
+                                };
                             }
                             otherImg.alt = defTexObj.name;
                             stage.appendChild(otherImg);
@@ -1370,7 +1391,14 @@ function forceTextureChange(zoneId, texId, texName) {
         } else if (texId === "verre") {
             newImg.src = "data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'/>";
         } else {
-            newImg.src = encodeURI(`Photo atelier/final/generations_automatiques/${currentId}/${zoneId}_${texId}.png`);
+            const basePath = `Photo atelier/final/generations_automatiques/${currentId}/${zoneId}_${texId}`;
+            newImg.src = encodeURI(`${basePath}.webp`);
+            newImg.onerror = function() {
+                if (this.src.includes('.webp')) {
+                    this.src = encodeURI(`${basePath}.png`);
+                    this.onerror = null;
+                }
+            };
         }
         newImg.alt = texName;
         
